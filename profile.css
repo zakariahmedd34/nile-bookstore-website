@@ -1,0 +1,146 @@
+/* ===== BASE PAGE STYLES (PROFILE PAGE) ===== */
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+
+    display: flex;
+    flex-direction: column;
+    min-width: 1200px;
+}
+
+/* FIXED WIDTH LAYOUT */
+.container {
+    width: 1100px;
+    margin: 0 auto;
+    flex: 1;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-actions button {
+    margin-left: 10px;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-outline {
+    border: 1px solid #005fa3;
+    background: none;
+    color: #005fa3;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+/* PAGE HEADER */
+.page-header {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.page-header p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* ACCOUNT LAYOUT */
+.account-layout {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.account-box {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.account-box h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* ACCOUNT FIELDS */
+.account-field {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.account-field .label {
+    color: #555;
+}
+
+.account-field .value {
+    font-weight: bold;
+}
+
+/* ACTIVITY LIST */
+.small-text {
+    font-size: 13px;
+    color: #666;
+}
+
+.activity-list {
+    margin-top: 10px;
+    padding-left: 18px;
+    font-size: 14px;
+    color: #444;
+}
+
+/* BUTTON INSIDE BOX */
+.account-btn {
+    margin-top: 15px;
+}

@@ -1,0 +1,116 @@
+/* ===== BASE PAGE STYLES (CHECKOUT CONFIRM PAGE) ===== */
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+
+    display: flex;
+    flex-direction: column;
+    min-width: 1200px;
+}
+
+/* FIXED WIDTH LAYOUT */
+.container {
+    width: 1100px;
+    margin: 0 auto;
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-actions button {
+    margin-left: 10px;
+}
+
+/* BUTTONS */
+.btn-primary {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-outline {
+    border: 1px solid #005fa3;
+    background: none;
+    color: #005fa3;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+/* CONFIRMATION BOX */
+.confirm-box {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    padding: 30px 40px;
+    max-width: 600px;
+    text-align: center;
+}
+
+.confirm-box h1 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 28px;
+    color: #005fa3;
+}
+
+.confirm-main-text {
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.confirm-sub-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.confirm-actions {
+    margin-top: 20px;
+}
+
+.confirm-actions .btn-primary {
+    margin-right: 8px;
+}

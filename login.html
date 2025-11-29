@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - NileUni Bookstore</title>
+
+    <!-- LOGIN PAGE STYLES (includes navbar, buttons, etc.) -->
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Nile University Bookstore</div>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="BooksPage.html">Books</a>
+            <a href="categories.html">Categories</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button onclick="window.location.href='cart.html'">🛒</button>
+            <button class="btn-outline" onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </div>
+
+
+    <!-- LOGIN FORM ONLY -->
+    <div class="container">
+        <div class="auth-wrapper">
+            <div class="auth-container">
+
+                <div class="auth-box">
+                    <h2>Login</h2>
+                    <p class="auth-subtitle">Welcome back! Please login to continue.</p>
+
+                    <form>
+                        <div class="auth-field">
+                            <label>Email</label>
+                            <input type="email" placeholder="example@nu.edu.eg">
+                        </div>
+
+                        <div class="auth-field">
+                            <label>Password</label>
+                            <input type="password" placeholder="Enter your password">
+                        </div>
+
+                        <button type="submit" class="btn-primary auth-btn">Login</button>
+
+                        <p class="auth-link-text">
+                            Don’t have an account?
+                            <a href="register.html">Register here</a>
+                        </p>
+                    </form>
+                </div>
+
+            </div>
+        </di

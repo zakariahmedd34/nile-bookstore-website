@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - NileUni Bookstore</title>
+    <link rel="stylesheet" href="bookdetails.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Nile University Bookstore</div>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="BooksPage.html">Books</a>
+            <a href="categories.html">Categories</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button onclick="window.location.href='cart.html'">🛒</button>
+            <button class="btn-outline" onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="container">
+
+        <!-- OPTIONAL: BACK LINK -->
+        <div class="back-link">
+            <a href="books.html">← Back to Books</a>
+            <!-- if you don't have books.html yet, you can change this later -->
+        </div>
+
+        <!-- BOOK DETAILS SECTION -->
+        <div class="book-details">
+
+            <!-- LEFT: BIG COVER -->
+            <div class="book-details-cover">
+                <div class="book-cover-large">
+                    CS101
+                </div>
+            </div>
+
+            <!-- RIGHT: INFO -->
+            <div class="book-details-info">
+                <h1>Intro to Programming</h1>
+                <p class="book-author">by John Smith</p>
+
+                <p class="book-meta">
+                    <span>Category: Computer Science</span><br>
+                    <span>Course: CS101</span><br>
+                    <span>Availability: In Stock</span>
+                </p>
+
+                <p class="book-price">EGP 450</p>
+
+                <p class="book-description">
+                    This textbook introduces the fundamentals of programming using a 
+                    beginner-friendly approach. It covers variables, control structures, 
+                    functions, arrays, and basic problem-solving techniques tailored for 
+                    first-year Nile University students.
+                </p>
+
+                <div class="book-actions">
+                    <button class="btn-primary">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        © 2025 NileUni Bookstore — All Rights Reserved
+    </div>
+
+</body>
+</html>

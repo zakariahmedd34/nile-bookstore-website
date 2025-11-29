@@ -1,0 +1,135 @@
+/* ===== BASE PAGE STYLES (HOME ONLY) ===== */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+
+    /* fixed layout, not responsive */
+    min-width: 1200px;
+}
+
+/* FIXED WIDTH PAGE CONTAINER */
+.container {
+    width: 1100px;          /* keeps layout fixed */
+    margin: 0 auto;         /* center page */
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-actions button {
+    margin-left: 10px;
+}
+
+/* BUTTON STYLES */
+.btn-primary {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-light {
+    background: #e8f1ff;
+    color: #005fa3;
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-outline {
+    border: 1px solid #005fa3;
+    background: none;
+    color: #005fa3;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* ===== HERO (OLD SIMPLE VERSION, NO VIDEO) ===== */
+.hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: #e8f1ff;
+}
+
+.search-bar {
+    margin: 20px 0;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+
+.hero-buttons button {
+    margin: 8px;
+}
+
+/* ===== SECTIONS ===== */
+.section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+/* BOOK GRID (ALWAYS 4 PER ROW, FIXED WIDTH) */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* fixed 4 columns */
+    column-gap: 25px;
+    row-gap: 25px;
+    margin-top: 20px;
+}
+
+/* BOOK CARD */
+.book-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.book-cover {
+    height: 120px;
+    background: #005fa3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+/* FOOTER (NORMAL, NOT STICKY) */
+.footer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}

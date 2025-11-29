@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - NileUni Bookstore</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Nile University Bookstore</div>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="BooksPage.html">Books</a>
+            <a href="categories.html">Categories</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button onclick="window.location.href='cart.html'">🛒</button>
+            <button class="btn-outline" onclick="window.location.href='login.html'">Logout</button>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+
+        <div class="page-header">
+            <h1>My Account</h1>
+            <p>View your account information and recent activity.</p>
+        </div>
+
+        <div class="account-layout">
+
+            <!-- LEFT: ACCOUNT INFO -->
+            <div class="account-box">
+                <h2>Account Details</h2>
+
+                <div class="account-field">
+                    <span class="label">Full Name</span>
+                    <span class="value">Student Name</span>
+                </div>
+
+                <div class="account-field">
+                    <span class="label">Email</span>
+                    <span class="value">example@nu.edu.eg</span>
+                </div>
+
+                <div class="account-field">
+                    <span class="label">Student ID</span>
+                    <span class="value">NU-123456</span>
+                </div>
+
+                <div class="account-field">
+                    <span class="label">Program</span>
+                    <span class="value">Computer Science</span>
+                </div>
+
+                <button class="btn-primary account-btn">Edit Profile (placeholder)</button>
+            </div>
+
+            <!-- RIGHT: ORDER SUMMARY / INFO -->
+            <div class="account-box">
+                <h2>Recent Activity</h2>
+                <p class="small-text">This section can later be connected to your backend to display recent orders, saved books, etc.</p>
+
+                <ul class="activity-list">
+                    <li>No recent orders available (demo data).</li>
+                </ul>
+
+                <button class="btn-outline account-btn" onclick="window.location.href='Bookspage.html'">
+                    Continue Shopping
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        © 2025 NileUni Bookstore — All Rights Reserved
+    </div>
+
+</body>
+</html>

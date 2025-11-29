@@ -1,0 +1,188 @@
+/* ===== BASE PAGE STYLES (BOOKS PAGE) ===== */
+html, body {
+    height: 100%;   /* allow full-height flex layout */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+
+    display: flex;
+    flex-direction: column;
+
+    /* same wide layout as other pages */
+    min-width: 1200px;
+}
+
+/* FIXED WIDTH PAGE CONTAINER */
+.container {
+    width: 1100px;
+    margin: 0 auto;
+
+    /* takes remaining vertical space so footer can sit at bottom */
+    flex: 1;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-actions button {
+    margin-left: 10px;
+}
+
+/* BUTTON STYLES */
+.btn-primary {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-light {
+    background: #e8f1ff;
+    color: #005fa3;
+    padding: 8px 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-outline {
+    border: 1px solid #005fa3;
+    background: none;
+    color: #005fa3;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* FOOTER — STICKS TO BOTTOM */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.page-header p {
+    margin-top: 8px;
+    color: #555;
+    font-size: 14px;
+}
+
+/* ===== TOOLBAR ===== */
+.books-toolbar {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Reuse same search style from home page */
+.search-bar input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}
+
+.search-bar button {
+    margin-left: 8px;
+}
+
+.toolbar-text {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ===== BOOKS GRID ===== */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* always 4 per row */
+    column-gap: 25px;
+    row-gap: 25px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+/* BOOK CARD */
+.book-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.book-cover {
+    height: 140px;
+    background: #005fa3;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.book-card h3 {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.book-author {
+    margin: 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.book-price {
+    margin-top: 8px;
+    font-weight: bold;
+    color: #005fa3;
+}
+
+/* ACTION BUTTONS */
+.book-actions {
+    margin-top: 12px;
+}
+
+.book-actions .btn-primary {
+    margin-right: 6px;
+}

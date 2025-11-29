@@ -1,0 +1,241 @@
+/* ===== BASE PAGE STYLES (CART PAGE) ===== */
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 1200px;
+}
+
+/* FIXED WIDTH PAGE CONTAINER */
+.container {
+    width: 1100px;
+    margin: 0 auto;
+    flex: 1; /* so footer pushes to bottom */
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-actions button {
+    margin-left: 10px;
+}
+
+/* BUTTON STYLES */
+.btn-primary {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-outline {
+    border: 1px solid #005fa3;
+    background: none;
+    color: #005fa3;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* LINK-STYLE SMALL BUTTON */
+.link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: #005fa3;
+    font-size: 13px;
+}
+
+/* FOOTER — STAYS AT BOTTOM */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 26px;
+}
+
+.page-header p {
+    margin-top: 8px;
+    color: #555;
+    font-size: 14px;
+}
+
+/* ===== CART LAYOUT ===== */
+.cart-layout {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+/* LEFT: CART ITEMS */
+.cart-items {
+    flex: 2;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 15px 20px;
+}
+
+/* CART ROWS */
+.cart-row {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 0.8fr;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    column-gap: 10px;
+}
+
+.cart-header {
+    font-weight: bold;
+    font-size: 13px;
+    color: #555;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Remove border from last data row */
+.cart-row:last-child {
+    border-bottom: none;
+}
+
+/* Columns */
+.cart-col {
+    font-size: 14px;
+}
+
+/* Book info cell */
+.cart-col-book {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cart-book-code {
+    width: 50px;
+    height: 60px;
+    background: #005fa3;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-book-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-book-title {
+    font-weight: bold;
+}
+
+.cart-book-meta {
+    font-size: 12px;
+    color: #777;
+}
+
+.cart-col-price,
+.cart-col-subtotal {
+    font-weight: bold;
+    color: #333;
+}
+
+/* Quantity input */
+.cart-col-qty input {
+    width: 60px;
+    padding: 4px 6px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Remove button */
+.cart-col-remove {
+    text-align: right;
+}
+
+/* ===== RIGHT: SUMMARY BOX ===== */
+.cart-summary {
+    flex: 1;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    align-self: flex-start;
+}
+
+.cart-summary h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.summary-total {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+    font-weight: bold;
+}
+
+.summary-btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.summary-note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #777;
+}

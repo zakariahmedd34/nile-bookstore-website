@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books - NileUni Bookstore</title>
+    <link rel="stylesheet" href="BooksPage.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="logo">Nile University Bookstore</div>
+
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="BooksPage.html">Books</a>
+            <a href="categories.html">Categories</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <button onclick="window.location.href='cart.html'">🛒</button>
+            <button class="btn-outline" onclick="window.location.href='login.html'">Login</button>
+        </div>
+    </div>
+
+    <!-- PAGE CONTENT -->
+    <div class="container">
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+            <h1>Browse All Books</h1>
+            <p>Explore textbooks, references, and general reading for Nile University students.</p>
+        </div>
+
+        <!-- TOOLBAR (SEARCH + SIMPLE FILTER TEXT) -->
+        <div class="books-toolbar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for a book...">
+                <button class="btn-primary">Search</button>
+            </div>
+
+            <div class="toolbar-text">
+                <span>Showing featured books across all categories.</span>
+            </div>
+        </div>
+
+        <!-- BOOKS GRID -->
+<div class="books-grid">
+
+    <!-- 1 -->
+    <div class="book-card">
+        <div class="book-cover">CS101</div>
+        <h3>Intro to Programming</h3>
+        <p class="book-author">Computer Science</p>
+        <p class="book-price">EGP 450</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="book-card">
+        <div class="book-cover">ENGR</div>
+        <h3>Statics & Mechanics</h3>
+        <p class="book-author">Engineering</p>
+        <p class="book-price">EGP 520</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="book-card">
+        <div class="book-cover">MATH</div>
+        <h3>Calculus I</h3>
+        <p class="book-author">Mathematics</p>
+        <p class="book-price">EGP 420</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="book-card">
+        <div class="book-cover">PHYS</div>
+        <h3>Physics for Engineers</h3>
+        <p class="book-author">Engineering</p>
+        <p class="book-price">EGP 480</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="book-card">
+        <div class="book-cover">BIO</div>
+        <h3>Cell Biology</h3>
+        <p class="book-author">Biology</p>
+        <p class="book-price">EGP 430</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="book-card">
+        <div class="book-cover">BUS</div>
+        <h3>Principles of Marketing</h3>
+        <p class="book-author">Business</p>
+        <p class="book-price">EGP 390</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="book-card">
+        <div class="book-cover">PSY</div>
+        <h3>Intro to Psychology</h3>
+        <p class="book-author">Psychology</p>
+        <p class="book-price">EGP 390</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="book-card">
+        <div class="book-cover">HIST</div>
+        <h3>Modern History</h3>
+        <p class="book-author">History</p>
+        <p class="book-price">EGP 370</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="book-card">
+        <div class="book-cover">NU01</div>
+        <h3>NU Research Highlights Vol. 1</h3>
+        <p class="book-author">Nile University Press</p>
+        <p class="book-price">EGP 350</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="book-card">
+        <div class="book-cover">CS201</div>
+        <h3>Data Structures</h3>
+        <p class="book-author">Computer Science</p>
+        <p class="book-price">EGP 500</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="book-card">
+        <div class="book-cover">CS301</div>
+        <h3>Algorithms</h3>
+        <p class="book-author">Computer Science</p>
+        <p class="book-price">EGP 540</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="book-card">
+        <div class="book-cover">CHEM</div>
+        <h3>Organic Chemistry I</h3>
+        <p class="book-author">Chemistry</p>
+        <p class="book-price">EGP 410</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="book-card">
+        <div class="book-cover">BIO202</div>
+        <h3>Genetics</h3>
+        <p class="book-author">Biology</p>
+        <p class="book-price">EGP 460</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="book-card">
+        <div class="book-cover">BUS201</div>
+        <h3>Microeconomics</h3>
+        <p class="book-author">Business</p>
+        <p class="book-price">EGP 420</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="book-card">
+        <div class="book-cover">BUS301</div>
+        <h3>Finance Principles</h3>
+        <p class="book-author">Business</p>
+        <p class="book-price">EGP 430</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 16 -->
+    <div class="book-card">
+        <div class="book-cover">CS401</div>
+        <h3>Operating Systems</h3>
+        <p class="book-author">Computer Science</p>
+        <p class="book-price">EGP 530</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 17 -->
+    <div class="book-card">
+        <div class="book-cover">CYBER</div>
+        <h3>Cybersecurity Essentials</h3>
+        <p class="book-author">Information Security</p>
+        <p class="book-price">EGP 480</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 18 -->
+    <div class="book-card">
+        <div class="book-cover">AIML</div>
+        <h3>Machine Learning Basics</h3>
+        <p class="book-author">Artificial Intelligence</p>
+        <p class="book-price">EGP 550</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 19 -->
+    <div class="book-card">
+        <div class="book-cover">ENV</div>
+        <h3>Environmental Science</h3>
+        <p class="book-author">Science</p>
+        <p class="book-price">EGP 360</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 20 -->
+    <div class="book-card">
+        <div class="book-cover">LAW</div>
+        <h3>Introduction to Law</h3>
+        <p class="book-author">Law</p>
+        <p class="book-price">EGP 410</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 21 -->
+    <div class="book-card">
+        <div class="book-cover">PHIL</div>
+        <h3>Critical Thinking</h3>
+        <p class="book-author">Philosophy</p>
+        <p class="book-price">EGP 380</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 22 -->
+    <div class="book-card">
+        <div class="book-cover">ART01</div>
+        <h3>Fundamentals of Drawing</h3>
+        <p class="book-author">Art</p>
+        <p class="book-price">EGP 390</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 23 -->
+    <div class="book-card">
+        <div class="book-cover">MATH201</div>
+        <h3>Linear Algebra</h3>
+        <p class="book-author">Mathematics</p>
+        <p class="book-price">EGP 440</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 24 -->
+    <div class="book-card">
+        <div class="book-cover">STATS</div>
+        <h3>Statistics for Data Science</h3>
+        <p class="book-author">Data Science</p>
+        <p class="book-price">EGP 470</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 25 -->
+    <div class="book-card">
+        <div class="book-cover">ENG101</div>
+        <h3>English Composition</h3>
+        <p class="book-author">Humanities</p>
+        <p class="book-price">EGP 350</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 26 -->
+    <div class="book-card">
+        <div class="book-cover">SOC</div>
+        <h3>Sociology Basics</h3>
+        <p class="book-author">Social Sciences</p>
+        <p class="book-price">EGP 360</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 27 -->
+    <div class="book-card">
+        <div class="book-cover">FIN</div>
+        <h3>Investment & Portfolio</h3>
+        <p class="book-author">Finance</p>
+        <p class="book-price">EGP 520</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 28 -->
+    <div class="book-card">
+        <div class="book-cover">MED01</div>
+        <h3>Basic Human Anatomy</h3>
+        <p class="book-author">Medical</p>
+        <p class="book-price">EGP 560</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 29 -->
+    <div class="book-card">
+        <div class="book-cover">MED02</div>
+        <h3>Clinical Biochemistry</h3>
+        <p class="book-author">Medical</p>
+        <p class="book-price">EGP 590</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 30 -->
+    <div class="book-card">
+        <div class="book-cover">FICTION</div>
+        <h3>The Long Night</h3>
+        <p class="book-author">Novel</p>
+        <p class="book-price">EGP 320</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 31 -->
+    <div class="book-card">
+        <div class="book-cover">BIO303</div>
+        <h3>Molecular Biology</h3>
+        <p class="book-author">Biology</p>
+        <p class="book-price">EGP 540</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+    <!-- 32 -->
+    <div class="book-card">
+        <div class="book-cover">PHYS303</div>
+        <h3>Quantum Physics Basics</h3>
+        <p class="book-author">Physics</p>
+        <p class="book-price">EGP 600</p>
+        <div class="book-actions">
+            <button class="btn-primary">Add to Cart</button>
+            <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
+        </div>
+    </div>
+
+</div>
+
