@@ -14,8 +14,8 @@
             </p>
 
             <div class="confirm-actions">
-                <button class="btn-primary" onclick="window.location.href='BooksPage.html'">Browse More Books</button>
-                <button class="btn-outline" onclick="window.location.href='home.html'">Back to Home</button>
+                <a href="{{ url_for('books_page') }}" class="btn-primary" style="text-decoration: none;">Browse More Books</a>
+                <a href="{{ url_for('home') }}" class="btn-outline" style="text-decoration: none;">Back to Home</a>
             </div>
         </div>
 

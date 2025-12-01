@@ -5,7 +5,8 @@ from seed_db import seed_books
 def register_routes(app,db):
     @app.route('/') 
     def home():
-        return render_template('home.html', css_file='home.css')
+        books = Book.query.all()
+        return render_template('home.html', css_file='home.css', books=books)
     
     @app.route('/second_homepage')
     def home_page():
@@ -54,6 +55,45 @@ def register_routes(app,db):
     @app.route('/seed_db')
     def seed():
         return render_template("test.html",people =  seed_books())
+    
+    @app.route('/debug_books')
+    def debug_books():
+        from app import db
+        from models import Book, Category
+        
+        # Check counts
+        book_count = Book.query.count()
+        category_count = Category.query.count()
+        
+        # Get all books
+        books = Book.query.all()
+        
+        # Prepare debug info
+        debug_info = f"""
+        <h2>Database Debug Info</h2>
+        <p>📚 Books in database: {book_count}</p>
+        <p>🏷️ Categories in database: {category_count}</p>
+        <hr>
+        """
+        
+        if books:
+            debug_info += "<h3>Books List:</h3><ul>"
+            for book in books:
+                debug_info += f"""
+                <li>
+                    <strong>{book.title}</strong> by {book.author}<br>
+                    Price: {book.price} EGP<br>
+                    Cover URL: {book.cover_url}<br>
+                    Category ID: {book.category_id}
+                </li>
+                <hr>
+                """
+            debug_info += "</ul>"
+        else:
+            debug_info += "<p style='color: red;'>❌ No books found in database!</p>"
+        
+        return debug_info
+
 
 
 

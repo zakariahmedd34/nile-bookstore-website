@@ -133,3 +133,48 @@ body {
     background: #fff;
     border-top: 1px solid #ddd;
 }
+/* Book cover styles */
+.book-cover-img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.book-cover-placeholder {
+    width: 150px;
+    height: 200px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.book-author {
+    color: #666;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.book-price {
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.book-description {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 10px 0;
+    height: 60px;
+    overflow: hidden;
+}
