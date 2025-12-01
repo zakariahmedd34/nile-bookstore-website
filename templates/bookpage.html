@@ -1,32 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse Books - NileUni Bookstore</title>
-    <link rel="stylesheet" href="css/BooksPage.css">
-</head>
 
-<body>
-
-    <!-- NAVBAR -->
-    <div class="navbar">
-        <div class="logo">Nile University Bookstore</div>
-
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="BooksPage.html">Books</a>
-            <a href="categories.html">Categories</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
-        <div class="nav-actions">
-            <button onclick="window.location.href='cart.html'">🛒</button>
-            <button class="btn-outline" onclick="window.location.href='login.html'">Login</button>
-        </div>
-    </div>
-
-    <!-- PAGE CONTENT -->
+{%extends'base.html'%}
+{%block content%}
+   <!-- PAGE CONTENT -->
     <div class="container">
 
         <!-- PAGE HEADER -->
@@ -433,6 +408,5 @@
             <button class="btn-outline" onclick="window.location.href='bookdetails.html'">View Details</button>
         </div>
     </div>
-
 </div>
-
+{%endblock%}

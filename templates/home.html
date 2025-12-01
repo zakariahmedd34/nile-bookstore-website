@@ -1,31 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NileUni Bookstore</title>
-    <link rel="stylesheet" href="css/home.css">
-</head>
-
-<body>
-
-    <!-- NAVBAR -->
-    <div class="navbar">
-        <div class="logo">Nile University Bookstore</div>
-
-        <div class="nav-links">
-            <a href="home.html">Home</a>
-            <a href="BooksPage.html">Books</a>
-            <a href="categories.html">Categories</a>
-            <a href="contact.html">Contact</a>
-        </div>
-
-        <div class="nav-actions">
-            <button onclick="window.location.href='cart.html'">🛒</button>
-            <button class="btn-outline" onclick="window.location.href='login.html'">Login</button>
-        </div>
-    </div>
-
+<!{%extends'base.html'%}
+{%block content%}
     <div class="hero">
         <h1>Find the Best Books for Nile University Students</h1>
         <p>Textbooks, references, novels, and more — all in one place.</p>
@@ -142,11 +116,4 @@
 
     </div> <!-- END container -->
 
-
-    <!-- FOOTER -->
-    <div class="footer">
-        © 2025 NileUni Bookstore — All Rights Reserved
-    </div>
-
-</body>
-</html>
+{%endblock%}

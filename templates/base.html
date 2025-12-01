@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - NileUni Bookstore</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename=css_file) }}">
+</head>
+<body>
+     <div class="navbar">
+        <div class="logo">Nile University Bookstore</div>
+
+        <div class="nav-links">
+            <a href="{{url_for('home')}}">Home</a>
+            <a href="{{url_for('books_page')}}">Books</a>
+            <a href="{{url_for('categories')}}">Categories</a>
+            <a href="{{url_for('contact')}}">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+            <!-- <button onclick=" window.location.href= '{{url_for('cart')}}' ">🛒</button> -->
+            <!-- <button onclick="location.href='{{ url_for('cart') }}'">🛒</button>
+              -->
+            <!-- <button onclick="window.location.href='{{ url_for('cart') }}'">🛒</button>
+            <button onclick="window.location.href='{{ url_for('login') }}'">Login</button> -->
+
+            <a href="{{url_for('cart')}}">
+                <button>🛒</button> 
+            </a>
+
+            <a href="{{url_for('login')}}">
+            <button>Login</button> 
+            </a>
+            
+
+            <!-- <button class="btn-outline" onclick="window.location.href='login.html'">Login</button> -->
+        </div>
+    </div>
+    {%block content%} {%endblock%}
+    <div>
+    <!-- FOOTER -->
+    <footer class="footer">
+        © 2025 NileUni Bookstore — All Rights Reserved
+    </footer>
+    </div>
+
+</body>
+</html>
