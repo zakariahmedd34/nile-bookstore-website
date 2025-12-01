@@ -2,8 +2,6 @@ from app import db
 from datetime import datetime
 from sqlalchemy import Enum
 
-
-
 class User(db.Model):
     __tablename__="user"
 
