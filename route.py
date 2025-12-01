@@ -1,11 +1,17 @@
 from flask import render_template, request
-from models import User  
-
+from models import User ,Book
+from seed_db import seed_books
 
 def register_routes(app,db):
     @app.route('/') 
     def home():
         return render_template('home.html', css_file='home.css')
+    
+    @app.route('/second_homepage')
+    def home_page():
+        books = Book.query.all()
+        return render_template('homepage2.html',css_file ='home.css',books = books) 
+
     @app.route('/bookdetail')
     def book_details():
         return render_template('bookdetails.html', css_file='bookdetails.css')
@@ -45,8 +51,9 @@ def register_routes(app,db):
     def index():
         users = User.query.all()
         return render_template("test.html",people = str(users))
-
-
+    @app.route('/seed_db')
+    def seed():
+        return render_template("test.html",people =  seed_books())
 
 
 
