@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+    <h1>Find the Best Books for Nile University Students</h1>
+    <p>Textbooks, references, novels, and more — all in one place.</p>
+
+    <div class="search-bar">
+        <input type="text" placeholder="Search for a book...">
+        <button class="btn-primary">Search</button>
+    </div>
+
+    <div class="hero-buttons">
+        <button class="btn-primary" onclick="window.location.href='/books'">Browse Books</button>
+        <button class="btn-light">Shop Categories</button>
+    </div>
+</div>
+
+<div class="container">
+
+    <div class="section">
+        <h2>Featured Books</h2>
+        <div class="book-grid">
+
+            {% for bk in books %}
+            <div class="book-card">
+                <img class="book-cover" src="{{ bk.cover_url }}" alt="{{ bk.title }}">
+                
+                <h3 class="book-title">{{ bk.title }}</h3>
+                
+                <p class="book-description">
+                    {{ bk.description[:120] }}...
+                </p>
+
+                <p class="book-price">
+                    Price: {{ bk.price }} EGP
+                </p>
+
+                <button class="btn-primary">Add to Cart</button>
+                <button class="btn-primary">View Book</button>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
