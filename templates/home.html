@@ -1,53 +1,52 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="container">
 
-<div class="hero">
-    <h1>Find the Best Books for Nile University Students</h1>
-    <p>Textbooks, references, novels, and more — all in one place.</p>
+        <div class="page-header">
+            <h1>Home Page</h1>
+            <p>Explore textbooks, references, and general reading for Nile University students.</p>
+        </div>
 
-    <div class="search-bar">
-        <input type="text" placeholder="Search for a book...">
-        <button class="btn-primary">Search</button>
-    </div>
-
-<div class="hero-buttons">
-    <a href="{{ url_for('books_page') }}" class="btn-primary">Browse Books</a>
-    <a href="{{ url_for('categories') }}" class="btn-light">Shop Categories</a>
-</div>
-</div>
-
+        <div class="books-toolbar">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for a book...">
+                <button class="btn-primary">Search</button>
+            </div>
+        </div>
 <div class="container">
     <div class="section">
         <h2>Featured Books</h2>
-        
-        {% if books %}
-        <div class="book-grid">
-            {% for book in books %}
-            <div class="book-card">
-                <!-- Book Cover Image -->
-                {% if book.cover_url %}
-                <img src="{{ book.cover_url }}" alt="{{ book.title }}" class="book-cover-img">
-                {% else %}
-                <div class="book-cover-placeholder">{{ book.title[:6] }}</div>
+        {% if cat_list %}
+            {% for cat in categories %}
+                {% set cat_books = cat_list[cat.id] %}
+
+                {% if cat_books %}
+                    <h3>{{ cat.name }}</h3>
+
+                    <div class="book-grid">
+                        {% for book in cat_books %}
+                            <div class="book-card">
+
+                                {% if book.cover_url %}
+                                    <img src="{{ book.cover_url }}" alt="{{ book.title }}" class="book-cover-img">
+                                {% else %}
+                                    <div class="book-cover-placeholder">{{ book.title[:6] }}</div>
+                                {% endif %}
+
+                                <h3>{{ book.title }}</h3>
+                                <p class="book-author">By {{ book.author }}</p>
+                                <p class="book-price">EGP {{ book.price }}</p>
+
+                                {% if book.description %}
+                                    <p class="book-description">{{ book.description[:80] }}...</p>
+                                {% endif %}
+                                <button class="btn-primary"onclick="window.location.href='{{url_for('book_details',book_id = book.id,slug = book.title|lower|replace(' ', '-') )}}'">View Book</button>
+
+                            </div>
+                        {% endfor %}
+                    </div>
                 {% endif %}
-                
-                <h3>{{ book.title }}</h3>
-                <p class="book-author">By {{ book.author }}</p>
-                <p class="book-price">EGP {{ book.price }}</p>
-                
-                {% if book.description %}
-                <p class="book-description">{{ book.description[:80] }}...</p>
-                {% endif %}
-                
-                <button class="btn-primary">Add to Cart</button>
-            </div>
             {% endfor %}
-        </div>
-        {% else %}
-        <div style="text-align: center; padding: 40px;">
-            <h3>No books available yet!</h3>
-            <p>Check back soon or <a href="/seed_db">seed the database</a>.</p>
-        </div>
         {% endif %}
     </div>
 </div>

@@ -5,42 +5,65 @@
 
         <!-- OPTIONAL: BACK LINK -->
         <div class="back-link">
-            <a href="{{url_for('books-page')}}">← Back to Books</a>
+            <a href="{{url_for('books_page')}}">← Back to Books</a>
             <!-- if you don't have books.html yet, you can change this later -->
         </div>
 
+
         <!-- BOOK DETAILS SECTION -->
         <div class="book-details">
-
             <!-- LEFT: BIG COVER -->
             <div class="book-details-cover">
-                <div class="book-cover-large">
-                    CS101
-                </div>
+                {% if book.cover_url %}
+                    <img src="{{ book.cover_url }}" alt="{{ book.title }}" class="book-cover-img-large">
+                {% endif %}
             </div>
-
             <!-- RIGHT: INFO -->
             <div class="book-details-info">
-                <h1>Intro to Programming</h1>
-                <p class="book-author">by John Smith</p>
+            <form method="POST" action="{{ url_for('add_to_cart', book_id=book.id) }}">
+                <h1>{{ book.title }}</h1>
+
+                <p class="book-publisher"> <br>{{ book.publisher }}<br></p>
 
                 <p class="book-meta">
-                    <span>Category: Computer Science</span><br>
-                    <span>Course: CS101</span><br>
+                    <span>Category: {{ book.category.name }}</span><br>
                     <span>Availability: In Stock</span>
                 </p>
 
-                <p class="book-price">EGP 450</p>
+                <p class="book-price">{{ book.price }} EGP</p>
 
-                <p class="book-description">
-                    This textbook introduces the fundamentals of programming using a 
-                    beginner-friendly approach. It covers variables, control structures, 
-                    functions, arrays, and basic problem-solving techniques tailored for 
-                    first-year Nile University students.
-                </p>
-                <div class="book-actions">
-                    <button class="btn-primary">Add to Cart</button>
+                <div class="quantity-selector">
+
+                    <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
+
+                    <input id="qtyInput" type="text" name="quantity" value="1" readonly class="qty-box">
+
+                    <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
+
+                 <button class="btn-primary" type="submit">Add to Cart</button>
+
                 </div>
+            </form>
+                <script>
+                    function changeQty(amount) {
+                        let input = document.getElementById("qtyInput");
+                        let current = parseInt(input.value);
+
+                        let updated = current + amount;
+
+                        if (updated < 1) updated = 1;   // Min = 1
+                        if (updated > 10) updated = 10; // Optional max
+
+                        input.value = updated;
+                    }
+                </script>
+
+
+                <p class="book-author"> <br>{{ book.author }}<br></p>
+                <p class="book-description">
+                    {{ book.description }}
+                </p>
+            
             </div>
         </div>
     </div>

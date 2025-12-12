@@ -178,3 +178,53 @@ body {
     height: 60px;
     overflow: hidden;
 }
+.flash {
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 600px;
+    font-size: 15px;
+    font-weight: 500;
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Success message */
+.flash-success {
+    background-color: #e6ffed;
+    color: #057a27;
+    border-left: 5px solid #057a27;
+}
+
+/* Error message */
+.flash-error {
+    background-color: #ffe6e6;
+    color: #b30000;
+    border-left: 5px solid #b30000;
+}
+
+/* Warning */
+.flash-warning {
+    background-color: #fff8e1;
+    color: #b68b00;
+    border-left: 5px solid #b68b00;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+   
+.flash {
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    width: 40%;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.flash-success { background: #d4edda; color: #155724; }
+.flash-info    { background: #cce5ff; color: #004085; }
+.flash-error   { background: #f8d7da; color: #721c24; }

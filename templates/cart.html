@@ -1,114 +1,94 @@
-{%extends'base.html'%}
-{%block content%}
-    <!-- PAGE CONTENT -->
-    <div class="container">
+{% extends 'base.html' %}
 
-        <!-- PAGE HEADER -->
-        <div class="page-header">
-            <h1>Your Cart</h1>
-            <p>Review your selected books before checkout.</p>
-        </div>
+    {% block content %}
 
-        <!-- CART CONTENT -->
-        <div class="cart-layout">
+    {% if cart_items|length > 0 %}
+        <div class="container">
+            
+            <div class="cart-layout">
+                <div class="cart-items">
+                    
+                    <div class="cart-row cart-header">
+                        <div class="cart-col cart-col-book">Book</div>
+                        <div class="cart-col cart-col-price">Unit Price</div>
+                        <div class="cart-col cart-col-qty">Quantity</div>
+                        <div class="cart-col cart-col-subtotal">Subtotal</div>
+                        <div class="cart-col cart-col-remove">Remove</div>
+                    </div>
 
-            <!-- LEFT: CART ITEMS TABLE -->
-            <div class="cart-items">
+                    {% set sum = namespace(total=0) %}
 
-                <!-- HEADER ROW -->
-                <div class="cart-row cart-header">
-                    <div class="cart-col cart-col-book">Book</div>
-                    <div class="cart-col cart-col-price">Price</div>
-                    <div class="cart-col cart-col-qty">Quantity</div>
-                    <div class="cart-col cart-col-subtotal">Subtotal</div>
-                    <div class="cart-col cart-col-remove">Remove</div>
+                    {% for q in cart_items %}
+                        {% for item in cart_items[q] %}
+                            {% set unique_id = item.id %}
+                            
+                            <div class="cart-row">
+                                {% set sum.total = sum.total + (item.price * q) %}
+                                
+                                <div class="cart-col cart-col-book">
+                                    <img src="{{ item.cover_url }}" alt="{{ item.title }}" class="book-cover-img">
+                                    <div class="cart-book-title">{{ item.title }}</div>
+                                </div>
+                                
+                                <div class="cart-col cart-col-price"> {{ item.price }} </div>
+                                
+                                <div class="cart-col cart-col-qty">
+                                    <form method="POST" action="{{ url_for('update_cart', book_id=item.id) }}"> 
+                                        <div class="quantity-selector">
+
+                                            <button type="button" class="qty-btn" onclick="changeQty('{{ unique_id }}', -1)">−</button>
+
+                                            <input id="qtyInput-{{ unique_id }}" 
+                                                   type="text" 
+                                                   name="quantity" 
+                                                   value="{{ q }}" 
+                                                   readonly 
+                                                   class="qty-box">
+
+                                            <button type="button" class="qty-btn" onclick="changeQty('{{ unique_id }}', 1)">+</button>
+
+                                            <button class="btn-primary" type="submit">Update</button>
+
+                                        </div>
+                                    </form> 
+                                </div>
+                                
+                                <div class="cart-col cart-col-subtotal"> {{ item.price * q }} EGP</div>
+                                <div class="cart-col cart-col-remove">
+                                    <button class="btn-primary"onclick="window.location.href='{{url_for('remove_from_cart', book_id=item.id)}}'">Remove</button>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                    <script>
+                        function changeQty(itemId, amount) {
+                            let input = document.getElementById("qtyInput-" + itemId);
+                            let current = parseInt(input.value);
+
+                            let updated = current + amount;
+
+                            if (updated < 1) updated = 1;      
+                            if (updated > 10) updated = 10;   
+
+                            input.value = updated;
+                        }
+                    </script> 
+                </div> 
+                <div class="cart-summary">
+                    <h2>Order Summary</h2>
+
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span>EGP {{ sum.total }}</span>
+                    </div>
+                    <a href="{{ url_for('checkout') }}" class="btn-primary summary-btn" style="text-decoration: none;">Proceed to Checkout</a>
+                    <p class="summary-note">
+                        Prices and availability are subject to change. Checkout is for demo purposes only.
+                    </p>
                 </div>
-
-                <!-- ITEM 1 -->
-                <div class="cart-row">
-                    <div class="cart-col cart-col-book">
-                        <div class="cart-book-code">CS101</div>
-                        <div class="cart-book-info">
-                            <div class="cart-book-title">Intro to Programming</div>
-                            <div class="cart-book-meta">Computer Science</div>
-                        </div>
-                    </div>
-                    <div class="cart-col cart-col-price">EGP 450</div>
-                    <div class="cart-col cart-col-qty">
-                        <input type="number" value="1" min="1">
-                    </div>
-                    <div class="cart-col cart-col-subtotal">EGP 450</div>
-                    <div class="cart-col cart-col-remove">
-                        <button class="link-btn">Remove</button>
-                    </div>
-                </div>
-
-                <!-- ITEM 2 -->
-                <div class="cart-row">
-                    <div class="cart-col cart-col-book">
-                        <div class="cart-book-code">ENGR</div>
-                        <div class="cart-book-info">
-                            <div class="cart-book-title">Statics & Mechanics</div>
-                            <div class="cart-book-meta">Engineering</div>
-                        </div>
-                    </div>
-                    <div class="cart-col cart-col-price">EGP 520</div>
-                    <div class="cart-col cart-col-qty">
-                        <input type="number" value="1" min="1">
-                    </div>
-                    <div class="cart-col cart-col-subtotal">EGP 520</div>
-                    <div class="cart-col cart-col-remove">
-                        <button class="link-btn">Remove</button>
-                    </div>
-                </div>
-
-                <!-- ITEM 3 -->
-                <div class="cart-row">
-                    <div class="cart-col cart-col-book">
-                        <div class="cart-book-code">MATH</div>
-                        <div class="cart-book-info">
-                            <div class="cart-book-title">Calculus I</div>
-                            <div class="cart-book-meta">Mathematics</div>
-                        </div>
-                    </div>
-                    <div class="cart-col cart-col-price">EGP 420</div>
-                    <div class="cart-col cart-col-qty">
-                        <input type="number" value="2" min="1">
-                    </div>
-                    <div class="cart-col cart-col-subtotal">EGP 840</div>
-                    <div class="cart-col cart-col-remove">
-                        <button class="link-btn">Remove</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- RIGHT: SUMMARY BOX -->
-            <div class="cart-summary">
-                <h2>Order Summary</h2>
-
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span>EGP 1,810</span>
-                </div>
-
-                <div class="summary-row">
-                    <span>Estimated VAT</span>
-                    <span>EGP 0</span>
-                </div>
-
-                <div class="summary-row summary-total">
-                    <span>Total</span>
-                    <span>EGP 1,810</span>
-                </div>
-
-                <a href="{{ url_for('checkout') }}" class="btn-primary summary-btn" style="text-decoration: none;">Proceed to Checkout</a>
-                <p class="summary-note">
-                    Prices and availability are subject to change. Checkout is for demo purposes only.
-                </p>
             </div>
 
         </div>
-
-    </div>
-{%endblock%}
+    {% endif %}
+{% endblock %}
