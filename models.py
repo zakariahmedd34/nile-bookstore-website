@@ -1,8 +1,9 @@
 from app import db
 from datetime import datetime
 from sqlalchemy import Enum
+from flask_login import UserMixin
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__="user"
 
     id = db.Column(db.Integer, primary_key = True)
@@ -10,9 +11,8 @@ class User(db.Model):
     fname = db.Column(db.String(30),nullable= False)
     lname = db.Column(db.String(30),nullable= False)
     user_name = db.Column(db.String(30),nullable= False)
-    phone = db.Column(db.String(25),nullable= False)
     email = db.Column(db.String(125),unique = True,nullable= False)
-    password = db.Column(db.String(70),nullable = False)
+    password = db.Column(db.String(80),nullable = False)
     is_admin = db.Column(db.Boolean, default=False)
 
 
@@ -25,14 +25,14 @@ class User(db.Model):
     payments = db.relationship('Payment', backref='user', lazy=True)
 
     def __repr__(self):
-        return f"User {self.fname}, {self.lname}, {self.user_name}"
+        return f"<User {self.fname}, {self.lname}, {self.user_name}>"
 
 #?----------------------------------------------------------------------------------------
 class Category(db.Model):
     __tablename__="category"
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50),nullable = False)
-
+    cover_url = db.Column(db.String(255), nullable=True)
     books = db.relationship('Book', backref='category', lazy=True)
 #?----------------------------------------------------------------------------------------
 class Book(db.Model):
@@ -59,7 +59,7 @@ class Book(db.Model):
     order_items = db.relationship('OrderItem', backref='book', lazy=True)
 
     def __repr__(self):
-        return f"Book {self.title}"
+        return f"<Book {self.title}>"
 
 #?----------------------------------------------------------------------------------------
 class Rate(db.Model):
@@ -82,7 +82,7 @@ class CartItem(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
 
     def __repr__(self):
-        return f"CartItem user={self.user_id} book={self.book_id}"
+        return f"<CartItem user={self.user_id} book={self.book_id}>"
 #?----------------------------------------------------------------------------------------
 class Wishlist(db.Model):
     __tablename__ = "wishlist"
@@ -92,7 +92,7 @@ class Wishlist(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
 
     def __repr__(self):
-        return f"Wishlist user={self.user_id} book={self.book_id}"
+        return f"<Wishlist user={self.user_id} book={self.book_id}>"
 #?----------------------------------------------------------------------------------------
 class Address(db.Model):
     __tablename__ = "address"
@@ -117,7 +117,7 @@ class Address(db.Model):
     orders = db.relationship('Order', backref='shipping_address', lazy=True)
 
     def __repr__(self):
-        return f"Address {self.id}"
+        return f"<Address {self.id}>"
 #?----------------------------------------------------------------------------------------
 class Order(db.Model):
     __tablename__ = "order"
@@ -153,7 +153,7 @@ class Order(db.Model):
     payments = db.relationship('Payment', backref='order', lazy=True)
 
     def __repr__(self):
-        return f"Order {self.id}"
+        return f"<Order {self.id}>"
 #?----------------------------------------------------------------------------------------
 class OrderItem(db.Model):
     __tablename__ = "order_item"
@@ -167,7 +167,7 @@ class OrderItem(db.Model):
     order_id =  db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
 
     def __repr__(self):
-        return f"OrderItem {self.id}"
+        return f"<OrderItem {self.id}>"
  #?----------------------------------------------------------------------------------------
 class Payment(db.Model):
     __tablename__ = "payment"
@@ -199,4 +199,4 @@ class Payment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return f"Payment {self.id}"
+        return f"<Payment {self.id}>"

@@ -17,41 +17,30 @@
 
                 <div class="account-field">
                     <span class="label">Full Name</span>
-                    <span class="value">Student Name</span>
+                    <span class="value">{{ current_user.fname }} {{ current_user.lname }}</span>
                 </div>
 
                 <div class="account-field">
                     <span class="label">Email</span>
-                    <span class="value">example@nu.edu.eg</span>
+                    <span class="value">{{ current_user.email }}</span>
                 </div>
-
                 <div class="account-field">
-                    <span class="label">Student ID</span>
-                    <span class="value">NU-123456</span>
+                    <span class="label">ID</span>
+                    <span class="value">{{ current_user.id }}</span>
                 </div>
-
                 <div class="account-field">
-                    <span class="label">Program</span>
-                    <span class="value">Computer Science</span>
+                    <span class="label">Username</span>
+                    <span class="value">{{ current_user.user_name }}</span>
                 </div>
-
+                {% if current_user.phone_number %}
+                    <div class="account-field">
+                        <span class="label">Phone Number</span>
+                        <span class="value">{{ current_user.phone_number }}</span>
+                    </div>
+                {% endif %}
                 <button class="btn-primary account-btn">Edit Profile (placeholder)</button>
             </div>
-
-            <!-- RIGHT: ORDER SUMMARY / INFO -->
-            <div class="account-box">
-                <h2>Recent Activity</h2>
-                <p class="small-text">This section can later be connected to your backend to display recent orders, saved books, etc.</p>
-
-                <ul class="activity-list">
-                    <li>No recent orders available (demo data).</li>
-                </ul>
-
-                <button class="btn-outline account-btn" onclick="window.location.href='Bookspage.html'">
-                    Continue Shopping
-                </button>
-            </div>
-
+            
         </div>
 
     </div>
