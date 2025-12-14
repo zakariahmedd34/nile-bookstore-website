@@ -12,6 +12,19 @@
                 This is a sample confirmation page. In the final system, this page can display your
                 order number, list of items, and estimated pickup or delivery details.
             </p>
+            {% if order %}
+                <p><b>Order #{{ order.id }}</b></p>
+                <p>Total: {{ order.total_amount }} EGP</p>
+
+                {% if order_lines %}
+                <ul>
+                    {% for l in order_lines %}
+                        <li>{{ l.book.title }} — Qty {{ l.qty }} — {{ l.unit_price }} EGP</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            {% endif %}
+
 
             <div class="confirm-actions">
                 <a href="{{ url_for('books_page') }}" class="btn-primary" style="text-decoration: none;">Browse More Books</a>
