@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h1>Checkout</h1>
+
+  <h2>Order summary</h2>
+  {% for line in cart_lines %}
+    <div style="margin-bottom:10px;">
+      <b>{{ line.book.title }}</b>
+      — Qty: {{ line.qty }}
+      — Subtotal: {{ line.subtotal }} EGP
+    </div>
+  {% endfor %}
+  <h3>Total: {{ total }} EGP</h3>
+
+  <form method="POST" action="{{ url_for('checkout') }}">
+    <h2>Shipping address</h2>
+
+    {% if addresses and addresses|length > 0 %}
+      <label>Choose saved address (optional):</label>
+        <select name="address_id">
+        <option value="">-- New Address --</option>
+        {% for a in addresses %}
+          <option value="{{ a.id }}">
+            {{ a.street_line1 }}, {{ a.city }}, {{ a.country }} ({{ a.phone_number }})
+          </option>
+        {% endfor %}
+      </select>
+      <br><br>
+    {% endif %}
+
+
+        <input name="user_fname" placeholder="First name">
+        <input name="user_lname" placeholder="Last name">
+        <input name="city" placeholder="City">
+        <input name="country" placeholder="Country">
+        <input name="street_line1" placeholder="Street line 1">
+        <input name="postal_code" placeholder="Postal code">
+        <input name="phone_number" placeholder="Phone number">
+
+
+    <h2>Payment</h2>
+
+    <label>
+    <input type="radio" name="payment_method" value="Cash"
+         {% if selected_pm is not defined or selected_pm == "Cash" %}checked{% endif %}>
+        Cash on Delivery
+    </label>
+
+    <br>
+
+    <label>
+    <input type="radio" name="payment_method" value="Visa"
+         {% if selected_pm == "Visa" %}checked{% endif %}>
+        Pay by Card (Stripe)
+    </label>
+
+
+
+    <br><br>
+    <button class="btn-primary" type="submit">Place Order</button>
+  </form>
+</div>
+
+{% endblock %}
