@@ -148,6 +148,60 @@ def register_routes(app,db,bcrypt):
     @login_required
     def profile():
         return render_template('profile.html', css_file='profile.css')
+
+
+    @app.route("/profile/addresses", methods=["GET", "POST"])
+    @login_required
+    def my_addresses():
+        if request.method == "POST":
+            address = Address(
+                user_id=current_user.id,
+                user_fname=request.form.get("user_fname"),
+                user_lname=request.form.get("user_lname"),
+                city=request.form.get("city"),
+                country=request.form.get("country"),
+                street_line1=request.form.get("street_line1"),
+                street_line2=request.form.get("street_line2"),
+                street_line3=request.form.get("street_line3"),
+                state=request.form.get("state"),
+                postal_code=request.form.get("postal_code"),
+                phone_number=request.form.get("phone_number"),
+            )
+            db.session.add(address)
+            db.session.commit()
+            flash("Address added successfully.", "success")
+            return redirect(url_for("my_addresses"))
+
+        addresses = Address.query.filter_by(user_id=current_user.id).all()
+        return render_template("my_addresses.html",css_file = "my_addresses.css" ,addresses=addresses)
+
+
+    @app.route("/profile/addresses/delete/<int:address_id>", methods=["POST"])
+    @login_required
+    def delete_address(address_id):
+        address = Address.query.filter_by(
+            id=address_id,
+            user_id=current_user.id
+        ).first_or_404()
+
+        used_in_order = Order.query.filter_by(
+            shipping_address_id=address.id
+        ).first()
+
+        if used_in_order:
+            flash("You cannot delete this address because it is used in an order.", "danger")
+            return redirect(url_for("my_addresses"))
+
+        db.session.delete(address)
+        db.session.commit()
+        flash("Address deleted successfully.", "success")
+        return redirect(url_for("my_addresses"))
+
+        
+    @app.route("/profile/addresses/edit/<int:address_id>")
+    @login_required
+    def edit_address(address_id):
+        pass
 #!-------------------------------------  Cart -------------------------------------------------------------------------------------
     @app.route('/cart')
     @login_required
@@ -223,11 +277,9 @@ def register_routes(app,db,bcrypt):
     
             return redirect(url_for('cart'))
         except Exception as e:
-            return str(e)
-        
+            return str(e)    
 #!--------------------------------------------------------------------------------------------------------------------------------------------------------------
 #!--------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
     #!checkout--------------------------------------------------------------------------------
     def _get_cart_lines(user_id: int):
         items = CartItem.query.filter_by(user_id=user_id).all()
@@ -241,11 +293,8 @@ def register_routes(app,db,bcrypt):
             subtotal = book.price * cartitem.quantity
             total += subtotal
             lines.append({"book": book, "qty": cartitem.quantity, "subtotal": subtotal})
-
         return lines, total
-    
-
-        #!checkout--------------------------------------------------------------------------------
+    #!checkout--------------------------------------------------------------------------------
     @app.route('/checkout', methods=['GET', 'POST'])
     @login_required
     def checkout():
@@ -302,7 +351,6 @@ def register_routes(app,db,bcrypt):
                     addresses=addresses,
                     selected_pm=payment_method
                 )
-
             address = Address.query.filter_by(id=address_id_int, user_id=current_user.id).first()
             if not address:
                 flash("Saved address not found for your account.", "error")
@@ -317,16 +365,19 @@ def register_routes(app,db,bcrypt):
 
         # 2) Otherwise create a new address
         if not address:
-            user_fname = request.form.get("user_fname")
-            user_lname = request.form.get("user_lname")
-            city = request.form.get("city")
-            country = request.form.get("country")
-            street_line1 = request.form.get("street_line1")
-            postal_code = request.form.get("postal_code")
-            phone_number = request.form.get("phone_number")
+                user_fname=request.form.get("user_fname"),
+                user_lname=request.form.get("user_lname"),
+                city=request.form.get("city"),
+                country=request.form.get("country"),
+                street_line1=request.form.get("street_line1"),
+                street_line2=request.form.get("street_line2"),
+                street_line3=request.form.get("street_line3"),
+                state=request.form.get("state"),
+                postal_code=request.form.get("postal_code"),
+                phone_number=request.form.get("phone_number"),
 
             # IMPORTANT: postal_code is required in your DB
-            if not all([user_fname, user_lname, city, country, street_line1, postal_code, phone_number]):
+        if not all([user_fname, user_lname, city, country, street_line1, street_line2,street_line3,state,postal_code, phone_number]):
                 flash("Please fill all required address fields OR select a saved address.", "error")
                 return render_template(
                     'checkout_page.html',
@@ -336,54 +387,22 @@ def register_routes(app,db,bcrypt):
                     addresses=addresses,
                     selected_pm=payment_method
                 )
+        address = Address(
+        user_id=current_user.id,
+        user_fname=user_fname,
+        user_lname=user_lname,
+        city=city,
+        country=country,
+        street_line1=street_line1,
+        street_line2=street_line2,
+        street_line3=street_line3,
+        state=state,
+        postal_code=postal_code,
+        phone_number=phone_number,
+        )
 
-            address = Address(
-                user_fname=user_fname,
-                user_lname=user_lname,
-                city=city,
-                country=country,
-                street_line1=street_line1,
-                postal_code=postal_code,
-                phone_number=phone_number,
-                user_id=current_user.id
-            )
-            db.session.add(address)
-            db.session.flush()
-
-        # address_id = request.form.get("address_id")
-        # address = None
-
-        # if address_id:
-        #     address = Address.query.filter_by(id=address_id, user_id=current_user.id).first()
-
-        # if not address:
-        #     user_fname = request.form.get("user_fname")
-        #     user_lname = request.form.get("user_lname")
-        #     city = request.form.get("city")
-        #     country = request.form.get("country")
-        #     street_line1 = request.form.get("street_line1")
-        #     postal_code = request.form.get("postal_code")
-        #     phone_number = request.form.get("phone_number")
-
-        #     # postal_code is NOT nullable in your model
-        #     if not all([user_fname, user_lname, city, country, street_line1, postal_code, phone_number]):
-        #         flash("Please fill all required address fields.", "error")
-        #         return redirect(url_for('checkout'))
-
-# ==========================================================================================
-            # address = Address(
-            #     user_fname=user_fname,
-            #     user_lname=user_lname,
-            #     city=city,
-            #     country=country,
-            #     street_line1=street_line1,
-            #     postal_code=postal_code,
-            #     phone_number=phone_number,
-            #     user_id=current_user.id
-            # )
-            # db.session.add(address)
-            # db.session.flush()
-
+        db.session.add(address)
+        db.session.commit()
         # -------------------------
         # CASE 1: CASH (Phase 1 behavior)
         # -------------------------
@@ -414,7 +433,6 @@ def register_routes(app,db,bcrypt):
 
             db.session.commit()
             return redirect(url_for('order_confirmation', order_id=order.id))
-
         # -------------------------
         # CASE 2: CARD via Stripe Checkout (Phase 2A)
         # We'll use "Visa" as the value (matches your Enum).
@@ -423,22 +441,13 @@ def register_routes(app,db,bcrypt):
             flash("Unsupported payment method.", "error")
             return redirect(url_for('checkout'))
 
-        stripe_key = os.getenv("STRIPE_SECRET_KEY", "").strip()
+        stripe_key = os.getenv("STRIPE_SECRET_KEY").strip()
         if not stripe_key:
             flash("Stripe is not configured (missing STRIPE_SECRET_KEY).", "error")
             return redirect(url_for('checkout'))
 
         stripe.api_key = stripe_key
 
-
-        # stripe_key = os.getenv("STRIPE_SECRET_KEY")
-        # if not stripe_key:
-        #     flash("Stripe is not configured (missing STRIPE_SECRET_KEY).", "error")
-        #     return redirect(url_for('checkout'))
-
-        # stripe.api_key = stripe_key
-
-        # Create Order first (because Payment.order_id is NOT nullable)
         order = Order(
             user_id=current_user.id,
             shipping_address_id=address.id,
@@ -500,8 +509,6 @@ def register_routes(app,db,bcrypt):
 
         db.session.commit()
         return redirect(session.url, code=303)
-
-
     @app.route('/pay/success/<int:order_id>')
     @login_required
     def stripe_success(order_id):
@@ -544,8 +551,6 @@ def register_routes(app,db,bcrypt):
 
         db.session.commit()
         return redirect(url_for('order_confirmation', order_id=order.id))
-
-
     @app.route('/pay/cancel/<int:order_id>')
     @login_required
     def stripe_cancel(order_id):
@@ -563,120 +568,6 @@ def register_routes(app,db,bcrypt):
 
         flash("Payment canceled. Your cart is unchanged.", "info")
         return redirect(url_for('checkout'))
-
-    # @app.route('/checkout', methods=['GET', 'POST'])
-    # @login_required
-    # def checkout():
-    #     cart_lines, total = _get_cart_lines(current_user.id)
-    #     if len(cart_lines) == 0:
-    #         flash("Your cart is empty!", "info")
-    #         return redirect(url_for('books_page'))
-
-    #     addresses = Address.query.filter_by(user_id=current_user.id).all()
-
-    #     if request.method == 'GET':
-    #         return render_template(
-    #             'checkout_page.html',
-    #             css_file='checkout.css',
-    #             cart_lines=cart_lines,
-    #             total=total,
-    #             addresses=addresses
-    #         )
-
-    #     # -------------------------
-    #     # POST = place COD order
-    #     # -------------------------
-    #     payment_method = request.form.get("payment_method", "Cash")
-    #     if payment_method != "Cash":
-    #         flash("For Phase 1 we only support Cash on Delivery.", "info")
-    #         return redirect(url_for('checkout'))
-
-    #     # -------------------------
-    #     # Address handling (NO JS)
-    #     # -------------------------
-    #     address_id = (request.form.get("address_id") or "").strip()
-    #     address = None
-
-    #     # 1) Use saved address if selected
-    #     if address_id:
-    #         try:
-    #             address_id_int = int(address_id)
-    #         except ValueError:
-    #             flash("Invalid address selected.", "error")
-    #             return redirect(url_for("checkout"))
-
-    #         address = Address.query.filter_by(id=address_id_int, user_id=current_user.id).first()
-    #         if not address:
-    #             flash("Saved address not found.", "error")
-    #             return redirect(url_for("checkout"))
-
-    #     # 2) Otherwise create a new address
-    #     else:
-    #         user_fname = request.form.get("user_fname")
-    #         user_lname = request.form.get("user_lname")
-    #         city = request.form.get("city")
-    #         country = request.form.get("country")
-    #         street_line1 = request.form.get("street_line1")
-    #         postal_code = request.form.get("postal_code")
-    #         phone_number = request.form.get("phone_number")
-
-    #         # Validate required fields (postal_code is required in your DB model)
-    #         if not all([user_fname, user_lname, city, country, street_line1, postal_code, phone_number]):
-    #             flash("Please fill all required address fields OR select a saved address.", "error")
-    #             return redirect(url_for('checkout'))
-
-    #         address = Address(
-    #             user_fname=user_fname,
-    #             user_lname=user_lname,
-    #             city=city,
-    #             country=country,
-    #             street_line1=street_line1,
-    #             postal_code=postal_code,
-    #             phone_number=phone_number,
-    #             user_id=current_user.id
-    #         )
-    #         db.session.add(address)
-    #         db.session.flush()  # ensures address.id is available
-
-    #     # -------------------------
-    #     # Create Order
-    #     # -------------------------
-    #     order = Order(
-    #         user_id=current_user.id,
-    #         shipping_address_id=address.id,
-    #         payment_method="Cash",
-    #         total_amount=float(total)
-    #     )
-    #     db.session.add(order)
-    #     db.session.flush()  # ensures order.id is available
-
-    #     # -------------------------
-    #     # Create Order Items
-    #     # -------------------------
-    #     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    #     for cartitem in cart_items:
-    #         book = Book.query.get(cartitem.book_id)
-    #         if not book:
-    #             continue
-
-    #         oi = OrderItem(
-    #             order_id=order.id,
-    #             book_id=book.id,
-    #             quantity=cartitem.quantity,
-    #             unit_price=float(book.price or 0)
-    #         )
-    #         db.session.add(oi)
-
-    #     # -------------------------
-    #     # Clear Cart
-    #     # -------------------------
-    #     for cartitem in cart_items:
-    #         db.session.delete(cartitem)
-
-    #     db.session.commit()
-
-    #     return redirect(url_for('order_confirmation', order_id=order.id))
-
     @app.route('/order-confirmed/<int:order_id>')
     @login_required
     def order_confirmation(order_id):
@@ -693,90 +584,6 @@ def register_routes(app,db,bcrypt):
             lines.append({"book": book, "qty": it.quantity, "unit_price": it.unit_price})
 
         return render_template("checkout.html",css_file="checkout.css",order=order,order_lines=lines)
-
-
-    # @app.route('/checkout', methods=['GET', 'POST'])
-    # @login_required
-    # def checkout():
-    #     cart_lines, total = _get_cart_lines(current_user.id)
-    #     if len(cart_lines) == 0:
-    #         flash("Your cart is empty!", "info")
-    #         return redirect(url_for('books_page'))
-
-    #     addresses = Address.query.filter_by(user_id=current_user.id).all()
-
-    #     if request.method == 'GET':
-    #         return render_template('checkout_page.html',css_file='checkout.css',cart_lines=cart_lines,total=total,addresses=addresses)
-
-    #     # -------------------------
-    #     # POST = place COD order
-    #     # -------------------------
-    #     payment_method = request.form.get("payment_method", "Cash")
-    #     if payment_method != "Cash":
-    #         flash("For Phase 1 we only support Cash on Delivery.", "info")
-    #         return redirect(url_for('checkout'))
-
-    #     # Either pick an existing address OR create a new one
-    #     address_id = request.form.get("address_id")
-    #     address = None
-
-    #     if address_id:
-    #         address = Address.query.filter_by(id=address_id, user_id=current_user.id).first()
-
-    #     if not address:
-    #         user_fname = request.form.get("user_fname")
-    #         user_lname = request.form.get("user_lname")
-    #         city = request.form.get("city")
-    #         country = request.form.get("country")
-    #         street_line1 = request.form.get("street_line1")
-    #         postal_code = request.form.get("postal_code")
-    #         phone_number = request.form.get("phone_number")
-
-    #         if not all([user_fname, user_lname, city, country, street_line1, phone_number]):
-    #             flash("Please fill all required address fields.", "error")
-    #             return redirect(url_for('checkout'))
-
-    #         address = Address(user_fname=user_fname,user_lname=user_lname,city=city,country=country,street_line1=street_line1, postal_code=postal_code,phone_number=phone_number,user_id=current_user.id)
-    #         db.session.add(address)
-    #         db.session.flush()
-
-    #     order = Order(user_id=current_user.id,shipping_address_id=address.id,payment_method="Cash",total_amount=float(total))
-    #     db.session.add(order)
-    #     db.session.flush()
-
-    #     cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-    #     for cartitem in cart_items:
-    #         book = Book.query.get(cartitem.book_id)
-    #         if not book:
-    #             continue
-    #         oi = OrderItem(order_id=order.id,book_id=book.id,quantity=cartitem.quantity,unit_price=float(book.price))
-    #         db.session.add(oi)
-
-    #     for cartitem in cart_items:
-    #         db.session.delete(cartitem)
-
-    #     db.session.commit()
-
-    #     return redirect(url_for('order_confirmation', order_id=order.id))
-
-    # @app.route('/order-confirmed/<int:order_id>')
-    # @login_required
-    # def order_confirmation(order_id):
-    #     order = Order.query.get_or_404(order_id)
-
-    #     if order.user_id != current_user.id and not current_user.is_admin:
-    #         flash("You are not allowed to view this order.", "error")
-    #         return redirect(url_for('home'))
-
-    #     items = OrderItem.query.filter_by(order_id=order.id).all()
-    #     lines = []
-    #     for it in items:
-    #         book = Book.query.get(it.book_id)
-    #         lines.append({"book": book, "qty": it.quantity, "unit_price": it.unit_price})
-
-    #     return render_template("checkout.html",css_file="checkout.css",order=order,order_lines=lines)
-
-
     @app.route('/seed_db')
     def seed():
         # seed_categories()

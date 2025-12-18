@@ -1,0 +1,134 @@
+/* ===== MY ADDRESSES PAGE (MATCHING SITE THEME) ===== */
+/* ===== BASE PAGE STYLES (BOOK DETAILS PAGE) ===== */
+html, body {
+    height: 100%;   /* makes full-height page */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+
+    display: flex;
+    flex-direction: column;
+
+    min-width: 1200px;
+}
+
+/* FIXED WIDTH PAGE CONTAINER */
+.container {
+    width: 1100px;
+    margin: 0 auto;
+
+    /* ensure content takes space before footer */
+    flex: 1;
+}
+
+/* NAVBAR */
+.navbar {
+    background: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+.nav-links a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+}
+
+.nav-actions button {
+    margin-left: 10px;
+}
+
+/* Page title */
+.container h2 {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-size: 26px;
+    color: #005fa3;
+}
+
+/* Address card */
+.card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Name */
+.card strong {
+    font-size: 16px;
+    color: #005fa3;
+}
+
+/* Divider */
+hr {
+    margin: 50px 0 30px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* Add Address title */
+.container h4 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #005fa3;
+}
+
+/* Form inputs */
+form .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+form .form-control:focus {
+    border-color: #005fa3;
+    box-shadow: 0 0 0 0.15rem rgba(0, 95, 163, 0.25);
+}
+
+/* Button (reuse site primary style) */
+form button.btn-primary {
+    margin-top: 10px;
+    padding: 10px 22px;
+    font-size: 14px;
+}
+
+/* Empty state */
+.container p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}

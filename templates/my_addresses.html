@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+  <h2>My Addresses</h2>
+
+  {% for a in addresses %}
+    <div class="card mb-3 p-3">
+      <strong>{{ a.user_fname }} {{ a.user_lname }}</strong><br>
+      {{ a.street_line1 }}<br>
+
+      {% if a.street_line2 %}
+        {{ a.street_line2 }}<br>
+      {% endif %}
+
+      {% if a.street_line3 %}
+        {{ a.street_line3 }}<br>
+      {% endif %}
+
+      {{ a.city }}, {{ a.state }}<br>
+      {{ a.country }} - {{ a.postal_code }}<br>
+      Phone: {{ a.phone_number }}
+
+      <div class="mt-2">
+        <a href="{{ url_for('edit_address', address_id=a.id) }}"
+           class="btn btn-secondary btn-sm">
+          Edit
+        </a>
+
+        <a href="{{ url_for('delete_address', address_id=a.id) }}"
+           class="btn btn-danger btn-sm">
+          Delete
+        </a>
+      </div>
+
+    </div>
+  {% else %}
+    <p>No saved addresses yet.</p>
+  {% endfor %}
+
+  <hr>
+
+  <h4>Add New Address</h4>
+
+  <form method="POST">
+    <input class="form-control mb-2" name="user_fname" placeholder="First name" required>
+    <input class="form-control mb-2" name="user_lname" placeholder="Last name" required>
+    <input class="form-control mb-2" name="street_line1" placeholder="Street line 1" required>
+    <input class="form-control mb-2" name="street_line2" placeholder="Street line 2">
+    <input class="form-control mb-2" name="street_line3" placeholder="Street line 3">
+    <input class="form-control mb-2" name="city" placeholder="City" required>
+    <input class="form-control mb-2" name="state" placeholder="State">
+    <input class="form-control mb-2" name="country" placeholder="Country" required>
+    <input class="form-control mb-2" name="postal_code" placeholder="Postal code" required>
+    <input class="form-control mb-3" name="phone_number" placeholder="Phone number" required>
+
+    <button class="btn btn-primary">Add Address</button>
+  </form>
+</div>
+
+{% endblock %}
