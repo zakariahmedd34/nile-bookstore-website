@@ -1,65 +1,98 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="container">
-  <h1>Checkout</h1>
 
-  <h2>Order summary</h2>
-  {% for line in cart_lines %}
-    <div style="margin-bottom:10px;">
-      <b>{{ line.book.title }}</b>
-      — Qty: {{ line.qty }}
-      — Subtotal: {{ line.subtotal }} EGP
+<div class="container mt-5">
+  <div class="row">
+
+    <!-- LEFT: Order Summary -->
+    <div class="col-md-5">
+      <h2 class="mb-3">Checkout</h2>
+
+      <div class="card p-3">
+        <h4>Order summary</h4>
+        <hr>
+        {% for line in cart_lines %}
+          <p>
+            <strong>{{ line.book.title }}</strong><br>
+            Qty: {{ line.qty }} <br>
+            Subtotal: {{ line.subtotal }} EGP
+          </p>
+        {% endfor %}
+        <hr>
+        <h5>Total: {{ total }} EGP</h5>
+      </div>
     </div>
-  {% endfor %}
-  <h3>Total: {{ total }} EGP</h3>
 
-  <form method="POST" action="{{ url_for('checkout') }}">
-    <h2>Shipping address</h2>
+    <!-- RIGHT: Shipping + Payment -->
+    <div class="col-md-7">
+        form method="POST" action="{{ url_for('checkout') }}">
+
+    <h4 class="mb-3">Shipping address</h4>
 
     {% if addresses and addresses|length > 0 %}
-      <label>Choose saved address (optional):</label>
-        <select name="address_id">
-        <option value="">-- New Address --</option>
-        {% for a in addresses %}
-          <option value="{{ a.id }}">
-            {{ a.street_line1 }}, {{ a.city }}, {{ a.country }} ({{ a.phone_number }})
-          </option>
-        {% endfor %}
-      </select>
-      <br><br>
+      <div class="mb-3">
+        <label class="form-label">Choose saved address (optional)</label>
+        <select name="address_id" id="addressSelect" class="form-select">
+          <option value="">New Address</option>
+          {% for a in addresses %}
+            <option value="{{ a.id }}">
+              {{ a.street_line1 }}, {{ a.city }}, {{ a.country }} ({{ a.phone_number }})
+            </option>
+          {% endfor %}
+        </select>
+      </div>
     {% endif %}
 
+    <!-- NEW ADDRESS FORM -->
+    <div id="newAddressForm">
+      <h4>Add New Address</h4>
 
-        <input name="user_fname" placeholder="First name">
-        <input name="user_lname" placeholder="Last name">
-        <input name="city" placeholder="City">
-        <input name="country" placeholder="Country">
-        <input name="street_line1" placeholder="Street line 1">
-        <input name="postal_code" placeholder="Postal code">
-        <input name="phone_number" placeholder="Phone number">
+      <input class="form-control mb-2" name="user_fname" placeholder="First name">
+      <input class="form-control mb-2" name="user_lname" placeholder="Last name">
+      <input class="form-control mb-2" name="street_line1" placeholder="Street line 1">
+      <input class="form-control mb-2" name="street_line2" placeholder="Street line 2">
+      <input class="form-control mb-2" name="street_line3" placeholder="Street line 3">
+      <input class="form-control mb-2" name="city" placeholder="City">
+      <input class="form-control mb-2" name="state" placeholder="State">
+      <input class="form-control mb-2" name="country" placeholder="Country">
+      <input class="form-control mb-2" name="postal_code" placeholder="Postal code">
+      <input class="form-control mb-3" name="phone_number" placeholder="Phone number">
+    </div>
+    <script>
+    const addressSelect = document.getElementById("addressSelect");
+    const newAddressForm = document.getElementById("newAddressForm");
+
+    function toggleAddressForm() {
+      if (!addressSelect || addressSelect.value === "") {
+        newAddressForm.style.display = "block";
+      } else {
+        newAddressForm.style.display = "none";
+      }
+    }
+
+    if (addressSelect) {
+      addressSelect.addEventListener("change", toggleAddressForm);
+      toggleAddressForm(); // run on page load
+    }
+  </script>
 
 
-    <h2>Payment</h2>
-
-    <label>
-    <input type="radio" name="payment_method" value="Cash"
-         {% if selected_pm is not defined or selected_pm == "Cash" %}checked{% endif %}>
-        Cash on Delivery
-    </label>
-
-    <br>
-
-    <label>
-    <input type="radio" name="payment_method" value="Visa"
-         {% if selected_pm == "Visa" %}checked{% endif %}>
-        Pay by Card (Stripe)
-    </label>
-
-
-
-    <br><br>
-    <button class="btn-primary" type="submit">Place Order</button>
-  </form>
+        <h4 class="mt-4">Payment</h4>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="payment_method"
+                 value="Cash"
+                 {% if selected_pm is not defined or selected_pm == "Cash" %}checked{% endif %}>
+          <label class="form-check-label">Cash on Delivery</label>
+        </div>
+        <div class="form-check mb-4">
+          <input class="form-check-input" type="radio" name="payment_method"
+                 value="Visa"
+                 {% if selected_pm == "Visa" %}checked{% endif %}>
+          <label class="form-check-label">Pay by Card (Stripe)</label>
+        </div>
+        <button class="btn btn-primary" type="submit">Place Order</button>
+      </form>
+    </div>
+  </div>
 </div>
-
 {% endblock %}
