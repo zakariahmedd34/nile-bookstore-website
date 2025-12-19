@@ -5,6 +5,9 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      STRIPE_SECRET_KEY: sk_test_dummykey123
+
     steps:
     - uses: actions/checkout@v3
 
