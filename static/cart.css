@@ -18,7 +18,7 @@ body {
 .container {
     width: 1100px;
     margin: 0 auto;
-    flex: 1; /* so footer pushes to bottom */
+    flex: 1;
 }
 
 /* NAVBAR */
@@ -35,6 +35,7 @@ body {
     font-weight: bold;
     font-size: 20px;
     color: #005fa3;
+    text-decoration: none;
 }
 
 .nav-links a {
@@ -52,18 +53,39 @@ body {
     background: #005fa3;
     color: white;
     border: none;
-    padding: 8px 14px;
+    padding: 10px 18px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #00457a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .btn-outline {
     border: 1px solid #005fa3;
     background: none;
     color: #005fa3;
-    padding: 6px 12px;
+    padding: 9px 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+    background: #005fa3;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
 /* LINK-STYLE SMALL BUTTON */
@@ -74,32 +96,37 @@ body {
     cursor: pointer;
     color: #005fa3;
     font-size: 13px;
+    text-decoration: none;
 }
 
-/* FOOTER — STAYS AT BOTTOM */
+/* FOOTER */
 .footer {
     margin-top: auto;
     padding: 20px;
     text-align: center;
     background: #fff;
     border-top: 1px solid #ddd;
+    font-size: 14px;
+    color: #444;
 }
 
 /* ===== PAGE HEADER ===== */
 .page-header {
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .page-header h1 {
     margin: 0;
     font-size: 26px;
+    letter-spacing: 0.5px;
 }
 
 .page-header p {
     margin-top: 8px;
     color: #555;
     font-size: 14px;
+    letter-spacing: 0.3px;
 }
 
 /* ===== CART LAYOUT ===== */
@@ -116,7 +143,7 @@ body {
     background: white;
     border-radius: 10px;
     border: 1px solid #ddd;
-    padding: 15px 20px;
+    padding: 20px;
 }
 
 /* CART ROWS */
@@ -124,9 +151,9 @@ body {
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr 0.8fr;
     align-items: center;
-    padding: 10px 0;
+    padding: 12px 0;
     border-bottom: 1px solid #eee;
-    column-gap: 10px;
+    column-gap: 12px;
 }
 
 .cart-header {
@@ -134,9 +161,9 @@ body {
     font-size: 13px;
     color: #555;
     border-bottom: 1px solid #ddd;
+    padding-bottom: 8px;
 }
 
-/* Remove border from last data row */
 .cart-row:last-child {
     border-bottom: none;
 }
@@ -150,7 +177,7 @@ body {
 .cart-col-book {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .cart-book-code {
@@ -169,10 +196,12 @@ body {
 .cart-book-info {
     display: flex;
     flex-direction: column;
+    gap: 2px;
 }
 
 .cart-book-title {
     font-weight: bold;
+    letter-spacing: 0.3px;
 }
 
 .cart-book-meta {
@@ -180,18 +209,45 @@ body {
     color: #777;
 }
 
+/* Price columns */
 .cart-col-price,
 .cart-col-subtotal {
     font-weight: bold;
     color: #333;
 }
 
-/* Quantity input */
+/* Quantity input group */
+.cart-col-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 .cart-col-qty input {
     width: 60px;
-    padding: 4px 6px;
-    border-radius: 5px;
+    padding: 6px 8px;
+    border-radius: 6px;
     border: 1px solid #ccc;
+    font-size: 14px;
+    text-align: center;
+    background: #fff;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.cart-col-qty button {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cart-col-qty button:hover {
+    background: #00457a;
 }
 
 /* Remove button */
@@ -205,44 +261,48 @@ body {
     background: white;
     border-radius: 10px;
     border: 1px solid #ddd;
-    padding: 20px;
+    padding: 25px;
     align-self: flex-start;
 }
 
 .cart-summary h2 {
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     font-size: 20px;
+    letter-spacing: 0.4px;
 }
 
 .summary-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 14px;
 }
 
 .summary-total {
-    margin-top: 10px;
-    padding-top: 8px;
+    margin-top: 12px;
+    padding-top: 10px;
     border-top: 1px solid #eee;
     font-weight: bold;
 }
 
 .summary-btn {
     width: 100%;
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 .summary-note {
-    margin-top: 10px;
+    margin-top: 12px;
     font-size: 12px;
     color: #777;
+    letter-spacing: 0.3px;
 }
+
+/* FLASH MESSAGES */
 .flash {
     padding: 12px 18px;
     border-radius: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     width: 40%;
     display: inline-block;
     font-weight: 600;
