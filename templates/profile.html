@@ -38,13 +38,6 @@
                     <input type="text" name="username" value="{{ current_user.username }}" class="form-input">
                 </div>
                 
-                {% if current_user.phone_number %}
-                <div class="account-field">
-                    <label class="label">Phone Number</label>
-                    <input type="text" name="phone_number" value="{{ current_user.phone_number }}" class="form-input">
-                </div>
-                {% endif %}
-                
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Save Changes</button>
                     <a href="{{ url_for('profile') }}" class="btn-secondary">Cancel</a>
