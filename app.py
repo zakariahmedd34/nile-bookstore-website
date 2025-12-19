@@ -48,6 +48,7 @@ def create_app(test_config=None):
     # INIT EXTENSIONS
     # =========================
     db.init_app(app)
+    from models import User,Payment,OrderItem,Address,Category,Book,Order,CartItem
     migrate.init_app(app, db)
 
     login_manager = LoginManager()
