@@ -60,6 +60,7 @@ def test_checkout_cash_with_new_address(logged_in_client, sample_book):
     }
     r = logged_in_client.post("/checkout", data=data, follow_redirects=False)
     assert r.status_code == 302
+    
     assert "/order-confirmed/" in r.headers.get("Location", "")
 
 def test_checkout_card_with_saved_address_success(app, logged_in_client, sample_book, monkeypatch):
