@@ -2,60 +2,128 @@
 {% block content %}
 
 <div class="container mt-4">
+
+{% if operation == 'show' %}
   <h2>My Addresses</h2>
 
-  {% for a in addresses %}
-    <div class="card mb-3 p-3">
-      <strong>{{ a.user_fname }} {{ a.user_lname }}</strong><br>
-      {{ a.street_line1 }}<br>
+  <a href="{{ url_for('add_address') }}" class="btn btn-success mb-3">
+    + Add New Address
+  </a>
 
-      {% if a.street_line2 %}
-        {{ a.street_line2 }}<br>
-      {% endif %}
+  {% if addresses %}
+    <div class="row">  
 
-      {% if a.street_line3 %}
-        {{ a.street_line3 }}<br>
-      {% endif %}
+    {% for a in addresses %}
+      <div class="col-12">  
+        <div class="card mb-3 p-3">
+          <strong>{{ a.user_fname }} {{ a.user_lname }}</strong><br>
+          {{ a.street_line1 }}<br>
 
-      {{ a.city }}, {{ a.state }}<br>
-      {{ a.country }} - {{ a.postal_code }}<br>
-      Phone: {{ a.phone_number }}
+          {% if a.street_line2 %}{{ a.street_line2 }}<br>{% endif %}
+          {% if a.street_line3 %}{{ a.street_line3 }}<br>{% endif %}
 
-      <div class="mt-2">
-        <a href="{{ url_for('edit_address', address_id=a.id) }}"
-           class="btn btn-secondary btn-sm">
-          Edit
-        </a>
+          {{ a.city }}{% if a.state %}, {{ a.state }}{% endif %}<br>
+          {{ a.country }} - {{ a.postal_code }}<br>
+          Phone: {{ a.phone_number }}
 
-        <a href="{{ url_for('delete_address', address_id=a.id) }}"
-           class="btn btn-danger btn-sm">
-          Delete
-        </a>
-      </div>
+        <div class="mt-2">
+          <button class="btn-primary"onclick="window.location.href='{{url_for('edit_address', address_id=a.id)}}'">Edit</button>
+        
+          <button class="btn-primary"onclick="window.location.href='{{url_for('delete_address', address_id=a.id)}}'">Delete</button>
+        </div>
+        </div>
+      </div>   
+    {% endfor %}
 
-    </div>
+    </div>   
   {% else %}
     <p>No saved addresses yet.</p>
-  {% endfor %}
+  {% endif %}
 
+{% else %}
   <hr>
+  <h4>{{ operation }} Address</h4>
 
-  <h4>Add New Address</h4>
+  <form method="POST"
+        action="{% if operation == 'Add New' %}
+                  {{ url_for('add_address') }}
+                {% else %}
+                  {{ url_for('update_address', address_id=address.id) }}
+                {% endif %}">
 
-  <form method="POST">
-    <input class="form-control mb-2" name="user_fname" placeholder="First name" required>
-    <input class="form-control mb-2" name="user_lname" placeholder="Last name" required>
-    <input class="form-control mb-2" name="street_line1" placeholder="Street line 1" required>
-    <input class="form-control mb-2" name="street_line2" placeholder="Street line 2">
-    <input class="form-control mb-2" name="street_line3" placeholder="Street line 3">
-    <input class="form-control mb-2" name="city" placeholder="City" required>
-    <input class="form-control mb-2" name="state" placeholder="State">
-    <input class="form-control mb-2" name="country" placeholder="Country" required>
-    <input class="form-control mb-2" name="postal_code" placeholder="Postal code" required>
-    <input class="form-control mb-3" name="phone_number" placeholder="Phone number" required>
+    <input class="form-control mb-2"
+           name="user_fname"
+           placeholder="First name"
+           value="{{ address.user_fname if operation == 'Edit' else '' }}"
+           required>
 
-    <button class="btn btn-primary">Add Address</button>
+    <input class="form-control mb-2"
+           name="user_lname"
+           placeholder="Last name"
+           value="{{ address.user_lname if operation == 'Edit' else '' }}"
+           required>
+
+    <input class="form-control mb-2"
+           name="street_line1"
+           placeholder="Street line 1"
+           value="{{ address.street_line1 if operation == 'Edit' else '' }}"
+           required>
+
+    <input class="form-control mb-2"
+           name="street_line2"
+           placeholder="Street line 2"
+           value="{{ address.street_line2 if operation == 'Edit' else '' }}">
+
+    <input class="form-control mb-2"
+           name="street_line3"
+           placeholder="Street line 3"
+           value="{{ address.street_line3 if operation == 'Edit' else '' }}">
+
+    <input class="form-control mb-2"
+           name="city"
+           placeholder="City"
+           value="{{ address.city if operation == 'Edit' else '' }}"
+           required>
+
+    <input class="form-control mb-2"
+           name="state"
+           placeholder="State"
+           value="{{ address.state if operation == 'Edit' else '' }}">
+
+    <input class="form-control mb-2"
+           name="country"
+           placeholder="Country"
+           value="{{ address.country if operation == 'Edit' else '' }}"
+           required>
+
+    <input class="form-control mb-2"
+           name="postal_code"
+           placeholder="Postal code"
+           value="{{ address.postal_code if operation == 'Edit' else '' }}"
+           required>
+
+    <input class="form-control mb-3"
+           name="phone_number"
+           placeholder="Phone number"
+           value="{{ address.phone_number if operation == 'Edit' else '' }}"
+           required>
+
+    <button class="btn btn-success">
+      {% if operation == 'Add New' %}
+        Add Address
+      {% else %}
+        Update Address
+      {% endif %}
+    </button>
+
+    <a href="{{ url_for('my_addresses') }}"
+    class="btn btn-secondary ms-2">
+    Cancel
+  </a>
+
   </form>
-</div>
 
+{% endif %}
+
+</div>
 {% endblock %}

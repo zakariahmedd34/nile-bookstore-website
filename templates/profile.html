@@ -49,15 +49,13 @@
         <div class="account-box">
             <h2>My Addresses</h2>
 
-            {% if addresses and addresses|length > 0 %}
-                {% for a in addresses %}
+            {% if address%}
                     <div class="account-field">
                         <span class="value">
-                            {{ a.street_line1 }}, {{ a.city }}, {{ a.country }}<br>
-                            {{ a.postal_code }} – {{ a.phone_number }}
+                            {{address.street_line1 }}, {{address.city }}, {{address.country}}<br>
+                            {{address.postal_code }} – {{address.phone_number }}
                         </span>
                     </div>
-                {% endfor %}
             {% else %}
                 <p>No saved addresses.</p>
             {% endif %}
