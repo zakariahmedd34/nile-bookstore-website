@@ -132,3 +132,23 @@ form button.btn-primary {
     background: #fff;
     border-top: 1px solid #ddd;
 }
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.flash-error {
+    background-color: #ffdddd;
+    color: #a30000;
+    border-left: 4px solid #a30000;
+}
+.auth-link-text a {
+    color: #005fa3;
+    text-decoration: none;
+}
+.auth-link-text a:hover {
+    text-decoration: underline;
+}
