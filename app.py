@@ -17,7 +17,7 @@ def create_app(test_config=None):
         app.config.update(test_config)
     else:
         db_user = os.getenv("MYSQLUSER", "root")
-        db_password = os.getenv("MYSQLPASSWORD", "") 
+        db_password = os.getenv("MYSQLPASSWORD", "Password%401234%23") 
         db_host = os.getenv("MYSQLHOST", "localhost")
         db_name = os.getenv("MYSQLDB", "bookstore")
 
