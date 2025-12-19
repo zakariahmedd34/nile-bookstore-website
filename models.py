@@ -18,8 +18,8 @@ class User(db.Model, UserMixin):
 
     #! Relationships
     cart_items = db.relationship('CartItem', backref='user', lazy=True)
-    wishlist_items = db.relationship('Wishlist', backref='user', lazy=True)
-    reviews = db.relationship("Rate",backref='user',lazy=True)
+    # wishlist_items = db.relationship('Wishlist', backref='user', lazy=True)
+    # reviews = db.relationship("Rate",backref='user',lazy=True)
     orders = db.relationship("Order",backref='user',lazy=True)
     addresses = db.relationship('Address', backref='user', lazy=True)
     payments = db.relationship('Payment', backref='user', lazy=True)
@@ -54,25 +54,26 @@ class Book(db.Model):
 
     #!Relationships
     cart_items = db.relationship('CartItem', backref='book', lazy=True)
-    wishlist_items = db.relationship('Wishlist', backref='book', lazy=True)
-    reviews = db.relationship('Rate', backref='book', lazy=True)
+    # wishlist_items = db.relationship('Wishlist', backref='book', lazy=True)
+    # reviews = db.relationship('Rate', backref='book', lazy=True)
     order_items = db.relationship('OrderItem', backref='book', lazy=True)
 
     def __repr__(self):
         return f"<Book {self.title}>"
 
 #?----------------------------------------------------------------------------------------
-class Rate(db.Model):
-    __tablename__="rate"
+# class Rate(db.Model):
+#     __tablename__="rate"
 
-    rate_value = db.Column(db.Float) # (1-5)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+#     rate_value = db.Column(db.Float) # (1-5)
+#     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
-    #!FK,PK
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
-    def __repr__(self):
-        return f"Rate user={self.user_id} book={self.book_id}"
+#     #!FK,PK
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+#     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
+#     def __repr__(self):
+#         return f"Rate user={self.user_id} book={self.book_id}"
+
 class CartItem(db.Model):
     __tablename__ = "cart_item"
     quantity = db.Column(db.Integer,default = 1)
@@ -84,15 +85,15 @@ class CartItem(db.Model):
     def __repr__(self):
         return f"<CartItem user={self.user_id} book={self.book_id}>"
 #?----------------------------------------------------------------------------------------
-class Wishlist(db.Model):
-    __tablename__ = "wishlist"
+# class Wishlist(db.Model):
+#     __tablename__ = "wishlist"
 
-    #!FK,PK
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
-    book_id = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
+#     #!FK,PK
+#     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+#     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), primary_key=True)
 
-    def __repr__(self):
-        return f"<Wishlist user={self.user_id} book={self.book_id}>"
+#     def __repr__(self):
+#         return f"<Wishlist user={self.user_id} book={self.book_id}>"
 #?----------------------------------------------------------------------------------------
 class Address(db.Model):
     __tablename__ = "address"

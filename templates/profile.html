@@ -12,7 +12,47 @@
         <!-- LEFT: ACCOUNT INFO -->
         <div class="account-box">
             <h2>Account Details</h2>
-
+            
+            {% if request.args.get('edit') == '1' or request.method == 'POST' and request.form.get('edit_profile') %}
+            <!-- EDIT MODE - triggered by ?edit=1 in URL or form submission -->
+            <form method="POST" class="edit-form">
+                <input type="hidden" name="edit_profile" value="1">
+                
+                <div class="account-field">
+                    <label class="label">First Name</label>
+                    <input type="text" name="user_fname" value="{{ current_user.fname }}" class="form-input">
+                </div>
+                
+                <div class="account-field">
+                    <label class="label">Last Name</label>
+                    <input type="text" name="user_lname" value="{{ current_user.lname }}" class="form-input">
+                </div>
+                
+                <div class="account-field">
+                    <label class="label">Email</label>
+                    <input type="email" name="email" value="{{ current_user.email }}" class="form-input">
+                </div>
+                
+                <div class="account-field">
+                    <label class="label">Username</label>
+                    <input type="text" name="username" value="{{ current_user.username }}" class="form-input">
+                </div>
+                
+                {% if current_user.phone_number %}
+                <div class="account-field">
+                    <label class="label">Phone Number</label>
+                    <input type="text" name="phone_number" value="{{ current_user.phone_number }}" class="form-input">
+                </div>
+                {% endif %}
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                    <a href="{{ url_for('profile') }}" class="btn-secondary">Cancel</a>
+                </div>
+            </form>
+            
+            {% else %}
+            <!-- VIEW MODE - normal profile page -->
             <div class="account-field">
                 <span class="label">Full Name</span>
                 <span class="value">{{ current_user.fname }} {{ current_user.lname }}</span>
@@ -39,23 +79,26 @@
                 <span class="value">{{ current_user.phone_number }}</span>
             </div>
             {% endif %}
-
-            <button class="btn-primary account-btn">
-                Edit Profile (placeholder)
-            </button>
+            
+            <div class="form-actions">
+                <a href="{{ url_for('profile', edit=1) }}" class="btn-primary account-btn">
+                    Edit Profile
+                </a>
+            </div>
+            {% endif %}
         </div>
 
         <!-- RIGHT: ADDRESSES -->
         <div class="account-box">
             <h2>My Addresses</h2>
 
-            {% if address%}
-                    <div class="account-field">
-                        <span class="value">
-                            {{address.street_line1 }}, {{address.city }}, {{address.country}}<br>
-                            {{address.postal_code }} – {{address.phone_number }}
-                        </span>
-                    </div>
+            {% if address %}
+                <div class="account-field">
+                    <span class="value">
+                        {{ address.street_line1 }}, {{ address.city }}, {{ address.country }}<br>
+                        {{ address.postal_code }} – {{ address.phone_number }}
+                    </span>
+                </div>
             {% else %}
                 <p>No saved addresses.</p>
             {% endif %}
@@ -69,4 +112,3 @@
 
 </div>
 {% endblock %}
-
