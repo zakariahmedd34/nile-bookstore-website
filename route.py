@@ -1,4 +1,5 @@
 from collections import defaultdict
+from sqlalchemy import or_
 from flask import flash, redirect, render_template, request, url_for
 from models import CartItem, Category, User ,Book, Address, Order, OrderItem, Payment
 from seed_db import seed_real_books, seed_categories
@@ -127,6 +128,7 @@ def register_routes(app,db,bcrypt):
     def admin_dashboard():
         return f"Hollo {current_user.fname} This is the admin dashboard."
     #!--------------------------------------------Book Routes--------------------------------------------------------
+    
     @app.route('/bookdetails/<int:book_id>-<slug>')
     def book_details(book_id, slug):
         book = Book.query.get_or_404(book_id)
@@ -143,8 +145,34 @@ def register_routes(app,db,bcrypt):
     def view_category_books(cat_id, slug):
         category = Category.query.get_or_404(cat_id)
         books = Book.query.filter_by(category_id=cat_id).all()
-        return render_template('bookpage.html', category=category, books=books,css_file='BooksPage.css')\
-    #------------------------------------------------------------------------------------------------------
+        return render_template('bookpage.html', category=category, books=books,css_file='BooksPage.css')
+
+
+    @app.route('/search',methods = ["GET","POST"])
+    def search():
+        query = request.args.get("q", "").strip()
+
+        if not query:
+            flash("Please enter a search term.", "info")
+            return redirect(url_for("books_page"))
+
+        results = Book.query.filter(
+            or_(
+                Book.title.ilike(f"%{query}%"),
+                Book.author.ilike(f"%{query}%"),
+                Book.publisher.ilike(f"%{query}%")
+            )
+        ).all()
+
+        if not results:
+            flash("No books found matching your search.", "info")
+
+        return render_template(
+            "bookpage.html",
+            books=results,
+            css_file='BooksPage.css'
+            
+        )
     @app.route('/profile')
     @login_required
     def profile():

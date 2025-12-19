@@ -8,14 +8,30 @@
             <p>Explore textbooks, references, and general reading for Nile University students.</p>
         </div>
 
+
+            <form class="d-flex" method="GET" action="{{ url_for('search') }}">
+            <input
+                class="form-control me-2"
+                type="search"
+                name="q"
+                placeholder="Search books..."
+                aria-label="Search"
+                required
+            >
+            <button class="btn btn-outline-primary" type="submit">
+                Search
+            </button>
+            </form>
+<!-- 
         <div class="books-toolbar">
             <div class="search-bar">
                 <input type="text" placeholder="Search for a book...">
                 <button class="btn-primary">Search</button>
             </div>
         </div>
-    <div class="books-grid">
+   
         <!-- 1 -->
+     <div class="books-grid">
         {%if books%}
             {%for bk in books %}
                 <div class="book-card">
