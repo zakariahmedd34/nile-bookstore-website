@@ -19,7 +19,8 @@ def create_app(test_config=None):
         password = ""
         app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@localhost:3306/bookstore"
 
-    app.secret_key = os.getenv("SECRET_KEY")
+    # Secret key for sessions
+    app.secret_key = os.getenv("SECRET_KEY") or "test-secret-key"
 
     db.init_app(app)
 

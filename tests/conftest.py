@@ -10,7 +10,8 @@ def app():
     test_config = {
         "TESTING": True,
         "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
-        "WTF_CSRF_ENABLED": False
+        "WTF_CSRF_ENABLED": False,
+        "SECRET_KEY": "test-secret-key"
     }
     app = create_app(test_config)
 
