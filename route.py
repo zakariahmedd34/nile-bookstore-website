@@ -8,7 +8,7 @@ load_dotenv()
 import stripe
 import os
 
-# load_dotenv()
+load_dotenv()
 # print("STRIPE_SECRET_KEY =", os.getenv("STRIPE_SECRET_KEY"))
 
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "").strip()
