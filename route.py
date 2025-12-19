@@ -173,11 +173,32 @@ def register_routes(app,db,bcrypt):
             css_file='BooksPage.css'
             
         )
-    @app.route('/profile')
+ #------------------------------------------------------
+    @app.route('/profile', methods=['GET', 'POST'])
     @login_required
     def profile():
         address = Address.query.filter_by(user_id=current_user.id).first()
-        return render_template('profile.html', css_file='profile.css',address=address)
+        
+        # Check if edit mode is requested via URL parameter
+        edit_mode = request.args.get('edit') == '1'
+
+        if request.method == 'POST' and request.form.get('edit_profile'):
+            # Handle form submission
+            current_user.user_fname = request.form.get('user_fname')
+            current_user.user_lname = request.form.get('user_lname')
+            current_user.email = request.form.get('email')
+            current_user.username = request.form.get('username')
+            db.session.commit()
+            flash('Profile updated successfully!', 'success')
+            return redirect(url_for('profile'))
+
+        # For GET requests, check if we're in edit mode
+        if request.method == 'GET' and edit_mode:
+            # Render the template in edit mode
+           return render_template('profile.html', address=address, edit=False, css_file='profile.css')
+
+        # Normal view mode
+        return render_template('profile.html', address=address, edit=False, css_file='profile.css')
 #!--------------------------------------------------- address--------------------------------------------------------------------------------
     @app.route("/profile/addresses", methods=["GET"])
     @login_required

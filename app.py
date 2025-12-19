@@ -16,8 +16,12 @@ def create_app(test_config=None):
     if test_config:
         app.config.update(test_config)
     else:
-        password = "Password%401234%23"
-        app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@localhost:3306/bookstore"
+        db_user = os.getenv("MYSQLUSER", "root")
+        db_password = os.getenv("MYSQLPASSWORD", "Password%401234%23") 
+        db_host = os.getenv("MYSQLHOST", "localhost")
+        db_name = os.getenv("MYSQLDB", "bookstore")
+
+        app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{db_user}:{db_password}@{db_host}:3306/{db_name}"
 
     # Secret key for sessions
     app.secret_key = os.getenv("SECRET_KEY") or "test-secret-key"
