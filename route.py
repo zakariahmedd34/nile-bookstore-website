@@ -173,7 +173,6 @@ def register_routes(app,db,bcrypt):
             css_file='BooksPage.css'
             
         )
- #------------------------------------------------------
     @app.route('/profile', methods=['GET', 'POST'])
     @login_required
     def profile():
@@ -184,7 +183,6 @@ def register_routes(app,db,bcrypt):
         
             current_user.fname = request.form.get('user_fname')
             current_user.lname = request.form.get('user_lname')
-            current_user.email = request.form.get('email')
             current_user.username = request.form.get('username')
             db.session.commit()
             flash('Profile updated successfully!', 'success')
