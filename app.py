@@ -13,10 +13,10 @@ def create_app():
 
     load_dotenv()
     app = Flask(__name__, template_folder='templates', static_folder='static')
-    # password = ""
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:nileRoot1234@127.0.0.1:3306/bookstore"
-    app.secret_key = "mysecapi"
-    # app.secret_key = os.getenv("SECRET_KEY")
+    password = ""
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@localhost:3306/bookstore"
+    # app.secret_key = "mysecapi"
+    app.secret_key = os.getenv("SECRET_KEY")
 
     db.init_app(app)
 
