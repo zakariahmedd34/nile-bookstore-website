@@ -174,8 +174,6 @@ def register_routes(app,db,bcrypt):
             
         )
  #------------------------------------------------------
-    # 
-    
     @app.route('/profile', methods=['GET', 'POST'])
     @login_required
     def profile():
