@@ -1,7 +1,6 @@
 /* ===== MY ADDRESSES PAGE (MATCHING SITE THEME) ===== */
-/* ===== BASE PAGE STYLES (BOOK DETAILS PAGE) ===== */
 html, body {
-    height: 100%;   /* makes full-height page */
+    height: 100%;
 }
 
 body {
@@ -11,7 +10,6 @@ body {
 
     display: flex;
     flex-direction: column;
-
     min-width: 1200px;
 }
 
@@ -19,136 +17,283 @@ body {
 .container {
     width: 1100px;
     margin: 0 auto;
-
-    /* ensure content takes space before footer */
     flex: 1;
+    padding: 30px 0 50px;
 }
 
-/* NAVBAR */
+/* ===== NAVBAR (keep everything on ONE line) ===== */
 .navbar {
     background: white;
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     border-bottom: 1px solid #ddd;
+    gap: 18px;
+    flex-wrap: nowrap;
 }
 
 .logo {
     font-weight: bold;
     font-size: 20px;
     color: #005fa3;
+    text-decoration: none;
+
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+/* Center nav links */
+.nav-links {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+
+    white-space: nowrap;
+    min-width: 0;
 }
 
 .nav-links a {
-    margin: 0 10px;
+    margin: 0; /* avoid pushing to new line */
     text-decoration: none;
     color: #444;
+    font-weight: 500;
 }
 
-.nav-actions button {
-    margin-left: 10px;
-}
-
-/* Page title */
-.container h2 {
-    margin-top: 25px;
-    margin-bottom: 25px;
-    font-size: 26px;
+.nav-links a:hover {
     color: #005fa3;
 }
 
-/* Address card */
+/* Right actions */
+.nav-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+
+    white-space: nowrap;
+}
+
+.nav-actions a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-actions button {
+    margin-left: 0; /* we use gap instead */
+}
+
+/* ===== SPACING HELPERS (bootstrap-like) ===== */
+.mt-4 { margin-top: 26px; }
+.mt-2 { margin-top: 12px; }
+.mb-3 { margin-bottom: 16px; }
+.mb-2 { margin-bottom: 12px; }
+.mb-4 { margin-bottom: 26px; }
+.ms-2 { margin-left: 10px; }
+
+/* Simple grid helpers used in your HTML */
+.row {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+/* ===== PAGE TITLES ===== */
+.container h2 {
+    margin: 0 0 18px;
+    font-size: 26px;
+    color: #005fa3;
+    letter-spacing: 0.4px;
+}
+
+.container h4 {
+    margin: 0 0 16px;
+    font-size: 20px;
+    color: #005fa3;
+    letter-spacing: 0.3px;
+}
+
+/* Divider (used before add/edit form section) */
+hr {
+    margin: 40px 0 22px;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+/* ===== BUTTON SYSTEM (match your website) ===== */
+.btn,
+.btn-primary,
+.btn-success,
+.btn-secondary {
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+/* Primary button (Edit/Delete) */
+.btn-primary {
+    background: #005fa3;
+    color: white;
+    padding: 10px 18px;
+}
+
+.btn-primary:hover {
+    background: #00457a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* "+ Add New Address" is btn btn-success -> style it as primary to match the site */
+.btn-success {
+    background: #005fa3;
+    color: white;
+    padding: 10px 18px;
+}
+
+.btn-success:hover {
+    background: #00457a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* Cancel link is btn btn-secondary -> make it outline style */
+.btn-secondary {
+    background: transparent;
+    color: #005fa3;
+    border: 1px solid #005fa3;
+    padding: 10px 18px;
+}
+
+.btn-secondary:hover {
+    background: #005fa3;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* ===== ADDRESS CARDS (show mode) ===== */
 .card {
     background: #ffffff;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 18px 22px;
-    margin-bottom: 20px;
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: #333;
-    transition: box-shadow 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
 
-.card:hover {
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-}
+/* your HTML also uses p-3 */
+.p-3 { padding: 18px; }
 
-/* Name */
 .card strong {
     font-size: 16px;
     color: #005fa3;
 }
 
-/* Divider */
-hr {
-    margin: 50px 0 30px;
-    border: none;
-    border-top: 1px solid #ddd;
+/* Buttons area inside each card */
+.card .mt-2 {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-/* Add Address title */
-.container h4 {
-    margin-bottom: 20px;
-    font-size: 20px;
-    color: #005fa3;
-}
-
-/* Form inputs */
-form .form-control {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 12px;
-    font-size: 14px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    outline: none;
-}
-
-form .form-control:focus {
-    border-color: #005fa3;
-    box-shadow: 0 0 0 0.15rem rgba(0, 95, 163, 0.25);
-}
-
-/* Button (reuse site primary style) */
-form button.btn-primary {
-    margin-top: 10px;
-    padding: 10px 22px;
-    font-size: 14px;
-}
-
-/* Empty state */
+/* ===== EMPTY STATE TEXT ===== */
 .container p {
     font-size: 14px;
     color: #666;
 }
 
-/* FOOTER */
+/* ===== FORM MODE (add/edit) ===== */
+form {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 22px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+
+    max-width: 720px;
+}
+
+/* Inputs */
+.form-control,
+.form-select {
+    width: 100%;
+    padding: 10px 12px;
+    font-size: 14px;
+
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    background: #fff;
+
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #005fa3;
+    outline: none;
+    box-shadow: 0 0 0 0.15rem rgba(0, 95, 163, 0.25);
+}
+
+/* Put action buttons nicely on one line */
+form button.btn,
+form a.btn {
+    margin-top: 6px;
+}
+
+form a.btn.btn-secondary {
+    text-decoration: none;
+}
+
+/* ===== FLASH MESSAGES (same as other pages) ===== */
+.flash-container {
+    width: 100%;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.flash {
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    width: 40%;
+    display: inline-block;
+    font-weight: 600;
+}
+
+.flash-success { background: #d4edda; color: #155724; }
+.flash-info    { background: #cce5ff; color: #004085; }
+.flash-error   { background: #f8d7da; color: #721c24; }
+
+/* ===== FOOTER ===== */
 .footer {
     margin-top: auto;
     padding: 20px;
     text-align: center;
     background: #fff;
     border-top: 1px solid #ddd;
-}
-
-.flash {
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
     font-size: 14px;
-}
-
-.flash-error {
-    background-color: #ffdddd;
-    color: #a30000;
-    border-left: 4px solid #a30000;
-}
-.auth-link-text a {
-    color: #005fa3;
-    text-decoration: none;
-}
-.auth-link-text a:hover {
-    text-decoration: underline;
+    color: #444;
 }
