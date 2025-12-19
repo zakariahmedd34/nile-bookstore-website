@@ -14,7 +14,9 @@ def create_app():
     load_dotenv()
     app = Flask(__name__, template_folder='templates', static_folder='static')
     password = ""
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@localhost:3306/bookstore"
+    if not app.config.get("TESTING"):
+        password = ""
+        app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://root:{password}@localhost:3306/bookstore"
     # app.secret_key = "mysecapi"
     app.secret_key = os.getenv("SECRET_KEY")
 
