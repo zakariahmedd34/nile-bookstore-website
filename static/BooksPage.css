@@ -1,6 +1,6 @@
 /* ===== BASE PAGE STYLES (BOOKS PAGE) ===== */
 html, body {
-    height: 100%;   /* allow full-height flex layout */
+    height: 100%;
 }
 
 body {
@@ -10,8 +10,6 @@ body {
 
     display: flex;
     flex-direction: column;
-
-    /* same wide layout as other pages */
     min-width: 1200px;
 }
 
@@ -19,8 +17,6 @@ body {
 .container {
     width: 1100px;
     margin: 0 auto;
-
-    /* takes remaining vertical space so footer can sit at bottom */
     flex: 1;
 }
 
@@ -38,6 +34,7 @@ body {
     font-weight: bold;
     font-size: 20px;
     color: #005fa3;
+    text-decoration: none;
 }
 
 .nav-links a {
@@ -55,9 +52,19 @@ body {
     background: #005fa3;
     color: white;
     border: none;
-    padding: 8px 14px;
+    padding: 10px 18px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: #00457a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .btn-light {
@@ -73,67 +80,97 @@ body {
     border: 1px solid #005fa3;
     background: none;
     color: #005fa3;
-    padding: 6px 12px;
+    padding: 9px 16px;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
 }
 
-/* FOOTER — STICKS TO BOTTOM */
+.btn-outline:hover {
+    background: #005fa3;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+/* FOOTER */
 .footer {
     margin-top: auto;
     padding: 20px;
     text-align: center;
     background: #fff;
     border-top: 1px solid #ddd;
+    font-size: 14px;
+    color: #444;
 }
 
 /* ===== PAGE HEADER ===== */
 .page-header {
     margin-top: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .page-header h1 {
     margin: 0;
     font-size: 26px;
+    letter-spacing: 0.5px;
 }
 
 .page-header p {
     margin-top: 8px;
     color: #555;
     font-size: 14px;
+    letter-spacing: 0.3px;
 }
 
-/* ===== TOOLBAR ===== */
-.books-toolbar {
-    margin-top: 15px;
-    margin-bottom: 20px;
+/* ===== SEARCH FORM ===== */
+form.d-flex {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
 }
 
-/* Reuse same search style from home page */
-.search-bar input {
-    padding: 10px;
-    width: 250px;
-    border-radius: 5px;
+form.d-flex input.form-control {
+    padding: 10px 12px;
+    width: 260px;
+    border-radius: 6px;
     border: 1px solid #bbb;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.search-bar button {
-    margin-left: 8px;
+form.d-flex input.form-control:focus {
+    border-color: #005fa3;
+    box-shadow: 0 0 6px rgba(0,95,163,0.3);
+    outline: none;
 }
 
-.toolbar-text {
-    font-size: 13px;
-    color: #666;
+form.d-flex button.btn {
+    background: #005fa3;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+form.d-flex button.btn:hover {
+    background: #00457a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 /* ===== BOOKS GRID ===== */
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* always 4 per row */
+    grid-template-columns: repeat(4, 1fr);
     column-gap: 25px;
     row-gap: 25px;
     margin-top: 10px;
@@ -143,10 +180,15 @@ body {
 /* BOOK CARD */
 .book-card {
     background: white;
-    padding: 15px;
+    padding: 18px;
     border-radius: 10px;
     border: 1px solid #ddd;
     text-align: left;
+    transition: box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .book-cover {
@@ -158,38 +200,41 @@ body {
     justify-content: center;
     font-weight: bold;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
-.book-card h3 {
+.book-title {
     margin: 5px 0;
     font-size: 16px;
+    letter-spacing: 0.3px;
 }
 
-.book-author {
-    margin: 0;
+.book-description {
     font-size: 13px;
-    color: #666;
+    color: #555;
+    margin-bottom: 8px;
 }
 
 .book-price {
-    margin-top: 8px;
     font-weight: bold;
     color: #005fa3;
+    margin-bottom: 10px;
 }
 
 /* ACTION BUTTONS */
 .book-actions {
-    margin-top: 12px;
+    margin-top: 14px;
 }
 
 .book-actions .btn-primary {
-    margin-right: 6px;
+    margin-right: 8px;
 }
+
+/* FLASH MESSAGES */
 .flash {
     padding: 12px 18px;
     border-radius: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     width: 40%;
     display: inline-block;
     font-weight: 600;
