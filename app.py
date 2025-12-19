@@ -1,59 +1,78 @@
-from flask import Flask, flash, redirect, url_for  
+from flask import Flask, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import os
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
+import os
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app(test_config=None):
     load_dotenv()
+
     app = Flask(__name__, template_folder='templates', static_folder='static')
 
-    # Apply test config if provided
+    # =========================
+    # CONFIG
+    # =========================
     if test_config:
         app.config.update(test_config)
     else:
-        
         database_url = os.getenv("DATABASE_URL")
 
         if database_url:
-            # Railway / Production
+            # Railway gives mysql:// but SQLAlchemy needs mysql+pymysql://
+            if database_url.startswith("mysql://"):
+                database_url = database_url.replace(
+                    "mysql://", "mysql+pymysql://", 1
+                )
+
             app.config["SQLALCHEMY_DATABASE_URI"] = database_url
         else:
-            # Local development
+            # Local MySQL
             db_user = os.getenv("MYSQLUSER", "root")
-            db_password = os.getenv("MYSQLPASSWORD", "Password@1234#")
+            db_password = os.getenv("MYSQLPASSWORD", "Password%401234%23")
             db_host = os.getenv("MYSQLHOST", "localhost")
             db_name = os.getenv("MYSQLDB", "bookstore")
 
-            app.config["SQLALCHEMY_DATABASE_URI"] = (f"mysql+pymysql://{db_user}:{db_password}@{db_host}:3306/{db_name}")
-            
-    # Secret key for sessions
-    app.secret_key = os.getenv("SECRET_KEY") or "test-secret-key"
+            app.config["SQLALCHEMY_DATABASE_URI"] = (
+                f"mysql+pymysql://{db_user}:{db_password}@{db_host}:3306/{db_name}"
+            )
 
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    app.secret_key = os.getenv("SECRET_KEY", "dev-secret-key")
+
+    # =========================
+    # INIT EXTENSIONS
+    # =========================
     db.init_app(app)
+    migrate.init_app(app, db)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
 
+    bcrypt = Bcrypt(app)
+
+    # =========================
+    # LOGIN MANAGER
+    # =========================
     from models import User
+
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
-    
-    bcrypt = Bcrypt(app)
 
     @login_manager.unauthorized_handler
     def unauthorized_callback():
         flash("You must login first.", "error")
-        return redirect(url_for('login'))
-    
+        return redirect(url_for("login"))
+
+    # =========================
+    # ROUTES
+    # =========================
     from route import register_routes
     register_routes(app, db, bcrypt)
-
-    migrate = Migrate(app, db)
 
     return app
