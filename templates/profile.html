@@ -27,17 +27,6 @@
                     <label class="label">Last Name</label>
                     <input type="text" name="user_lname" value="{{ current_user.lname }}" class="form-input">
                 </div>
-                
-                <div class="account-field">
-                    <label class="label">Email</label>
-                    <input type="email" name="email" value="{{ current_user.email }}" class="form-input">
-                </div>
-                
-                <div class="account-field">
-                    <label class="label">Username</label>
-                    <input type="text" name="username" value="{{ current_user.username }}" class="form-input">
-                </div>
-                
                 <div class="form-actions">
                     <button type="submit" class="btn-primary">Save Changes</button>
                     <a href="{{ url_for('profile') }}" class="btn-secondary">Cancel</a>
