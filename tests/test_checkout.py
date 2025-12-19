@@ -81,7 +81,8 @@ def test_checkout_card_with_saved_address_success(app, logged_in_client, sample_
     }
     r = logged_in_client.post("/checkout", data=data, follow_redirects=False)
     # Should redirect to Stripe (mock URL)
-    assert r.status_code == 303
+    assert r.status_code == 302
+
     assert r.headers.get("Location") == fake_session.url
 
     # Now simulate Stripe success callback
@@ -132,7 +133,7 @@ def test_checkout_card_cancel_flow(app, logged_in_client, sample_book, monkeypat
     r = logged_in_client.post("/checkout",
                               data={"payment_method": "Visa", "address_id": str(address_id)},
                               follow_redirects=False)
-    assert r.status_code == 303
+    assert r.status_code == 302
 
     # Simulate cancel route
     with app.app_context():

@@ -542,7 +542,7 @@ def register_routes(app,db,bcrypt):
         payment.payment_reference = getattr(session, "payment_intent", None)
 
         db.session.commit()
-        return redirect(session.url, code=303)
+        return redirect(session.url)
     @app.route('/pay/success/<int:order_id>')
     @login_required
     def stripe_success(order_id):
