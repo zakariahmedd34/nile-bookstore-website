@@ -1,13 +1,11 @@
 from flask import Flask, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from dotenv import load_dotenv
 import os
 
 db = SQLAlchemy()
-migrate = Migrate()
 
 def create_app(test_config=None):
     load_dotenv()
@@ -21,7 +19,6 @@ def create_app(test_config=None):
         app.config.update(test_config)
     else:
         database_url = os.getenv("DATABASE_URL")
-
         if database_url:
             app.config["SQLALCHEMY_DATABASE_URI"] = database_url
         else:
@@ -35,18 +32,10 @@ def create_app(test_config=None):
     # =========================
     db.init_app(app)
 
-    from models import (
-        User,
-        Payment,
-        OrderItem,
-        Address,
-        Category,
-        Book,
-        Order,
-        CartItem,
-    )
+    from models import User, Payment, OrderItem, Address, Category, Book, Order, CartItem
 
-    migrate.init_app(app, db)
+    with app.app_context():
+        db.create_all()
 
     login_manager = LoginManager()
     login_manager.init_app(app)
