@@ -2,36 +2,18 @@ from flask import Flask, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from dotenv import load_dotenv
-import os
 
 db = SQLAlchemy()
 
-def create_app(test_config=None):
-    load_dotenv()
-
+def create_app():
     app = Flask(__name__, template_folder="templates", static_folder="static")
 
     # =========================
-    # CONFIG
+    # CONFIG (SQLite فقط)
     # =========================
-    if test_config:
-        app.config.update(test_config)
-    else:
-        database_url = os.getenv("DATABASE_URL")
-
-        if not database_url:
-            raise RuntimeError("DATABASE_URL is not set")
-
-        if database_url.startswith("mysql://"):
-            database_url = database_url.replace(
-                "mysql://", "mysql+pymysql://", 1
-            )
-
-        app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.secret_key = os.getenv("SECRET_KEY", "dev-secret-key")
+    app.secret_key = "dev-secret-key"
 
     # =========================
     # INIT EXTENSIONS
@@ -40,7 +22,6 @@ def create_app(test_config=None):
 
     from models import User, Payment, OrderItem, Address, Category, Book, Order, CartItem
 
-   
     with app.app_context():
         db.create_all()
 
