@@ -2,7 +2,7 @@ from collections import defaultdict
 from sqlalchemy import or_
 from flask import flash, redirect, render_template, request, url_for
 from models import CartItem, Category, User ,Book, Address, Order, OrderItem, Payment
-from seed_db import seed_real_books, seed_categories
+from seed_db import seed_books
 from flask_login import login_user, logout_user, login_required, current_user
 from dotenv import load_dotenv
 load_dotenv()
@@ -11,7 +11,6 @@ import os
 
 load_dotenv()
 # print("STRIPE_SECRET_KEY =", os.getenv("STRIPE_SECRET_KEY"))
-
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY", "").strip()
 
 def register_routes(app,db,bcrypt):
@@ -662,8 +661,7 @@ def register_routes(app,db,bcrypt):
         return render_template("checkout.html",css_file="checkout.css",order=order,order_lines=lines)
     @app.route('/seed_db')
     def seed():
-        # seed_categories()
-        seed_real_books()
-        return "Database seeded with real books!"
+        seed_books(200)
+        return "Database seeded successfully"
     
 
