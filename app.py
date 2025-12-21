@@ -1,23 +1,19 @@
 from flask import Flask, flash, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from extensions import db
 
-db = SQLAlchemy()
-
-def create_app():
+def create_app(test_config=None):
     app = Flask(__name__, template_folder="templates", static_folder="static")
 
-    # =========================
-    # CONFIG (SQLite فقط)
-    # =========================
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.secret_key = "dev-secret-key"
+    if test_config:
+        app.config.update(test_config)
+    else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
+        app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+        app.secret_key = "dev-secret-key"
 
-    # =========================
-    # INIT EXTENSIONS
-    # =========================
+    
     db.init_app(app)
 
     from models import User, Payment, OrderItem, Address, Category, Book, Order, CartItem
